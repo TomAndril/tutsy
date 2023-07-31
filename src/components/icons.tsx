@@ -1,9 +1,10 @@
-import { Youtube, Users, Settings } from "lucide-react";
+import { Youtube, Users, Settings, Plus } from "lucide-react";
 
-export const icons = {
+export const Icons = {
   youtube: Youtube,
   users: Users,
   settings: Settings,
+  plus: Plus,
 };
 
-export type IconName = keyof typeof icons;
+export type IconName = keyof typeof Icons;
