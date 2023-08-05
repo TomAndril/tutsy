@@ -19,7 +19,8 @@ export default function DashboardAside() {
             <Button
               asChild
               className={cn("w-full justify-start", {
-                "bg-white text-slate-900 font-semibold": path === item.href,
+                "bg-slate-600 text-slate-200 dark:bg-white dark:text-slate-900 font-semibold":
+                  path === item.href,
               })}
               variant="ghost"
             >

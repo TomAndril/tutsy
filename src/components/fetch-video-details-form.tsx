@@ -2,7 +2,10 @@
 
 import useFetchVideoDetails from "@/hooks/use-fetch-video-details";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { AddVideoSchema, addVideoSchema } from "@/lib/validations";
+import {
+  AddVideoSchema,
+  addVideoSchema,
+} from "@/lib/validations/youtube-video";
 import { useForm } from "react-hook-form";
 import {
   Form,
