@@ -9,9 +9,7 @@ export default function NoVideosPlaceholder() {
         <Icons.youtube size={48} />
       </div>
       <h2 className="mt-4 text-xl font-semibold">No videos added</h2>
-      <p className="mt-2 text-slate-400">
-        You don&apos;t have any videos yet. Add a new one{" "}
-      </p>
+      <p className="mt-2">You don&apos;t have any videos yet. Add a new one </p>
       <Button className="mt-8" variant="secondary" asChild>
         <Link href="/dashboard/add">
           <Icons.plus size={14} />

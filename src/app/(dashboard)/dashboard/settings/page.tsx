@@ -1,5 +1,6 @@
 import DashboardContent from "@/components/dashboard-content";
 import DashboardHeader from "@/components/dashboard-header";
+import ThemeSelectorForm from "@/components/theme-selector-form";
 
 export default function SettingsPage() {
   return (
@@ -9,7 +10,7 @@ export default function SettingsPage() {
         subheading="Change your account settings"
       />
       <DashboardContent>
-        <h1>Settings</h1>;
+        <ThemeSelectorForm />
       </DashboardContent>
     </div>
   );

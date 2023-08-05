@@ -21,7 +21,7 @@ export default async function NavBarRightSide() {
   if (session?.name && session?.image) {
     return (
       <div className="flex items-center">
-        <Button asChild variant="link" className="text-white mr-2">
+        <Button asChild variant="link">
           <Link href="/dashboard">Dashboard</Link>
         </Button>
         <Popover>
