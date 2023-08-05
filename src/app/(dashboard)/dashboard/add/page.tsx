@@ -1,15 +1,12 @@
 import DashboardContent from "@/components/dashboard-content";
 import DashboardHeader from "@/components/dashboard-header";
 
-export default function SettingsPage() {
+export default function Add() {
   return (
     <div>
-      <DashboardHeader
-        title="Settings"
-        subheading="Change your account settings"
-      />
+      <DashboardHeader title="Add" subheading="Add a new video" />
       <DashboardContent>
-        <h1>Settings</h1>;
+        <h1>Hola</h1>
       </DashboardContent>
     </div>
   );

@@ -1,7 +1,9 @@
+import DashboardContent from "@/components/dashboard-content";
 import DashboardHeader from "@/components/dashboard-header";
 import { Icons } from "@/components/icons";
 import NoVideosPlaceholder from "@/components/no-videos-placeholder";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 export default function Dashboard() {
   const Icon = Icons["plus"];
@@ -11,12 +13,16 @@ export default function Dashboard() {
         title="Videos"
         subheading="Browse your videos and add new ones"
       >
-        <Button size="lg" variant="secondary">
-          <Icon size={14} />
-          <span className="ml-2">Add Video</span>
+        <Button size="lg" variant="secondary" asChild>
+          <Link href="/dashboard/add">
+            <Icon size={14} className="mr-2" />
+            <span>Add video</span>
+          </Link>
         </Button>
       </DashboardHeader>
-      <NoVideosPlaceholder />
+      <DashboardContent>
+        <NoVideosPlaceholder />
+      </DashboardContent>
     </div>
   );
 }
