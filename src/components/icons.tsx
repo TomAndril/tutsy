@@ -1,4 +1,12 @@
-import { Youtube, Users, Settings, Plus, Search } from "lucide-react";
+import {
+  Youtube,
+  Users,
+  Settings,
+  Plus,
+  Search,
+  CheckCircle,
+  CircleOff,
+} from "lucide-react";
 
 export const Icons = {
   youtube: Youtube,
@@ -6,6 +14,8 @@ export const Icons = {
   settings: Settings,
   plus: Plus,
   search: Search,
+  checkmark: CheckCircle,
+  off: CircleOff,
 };
 
 export type IconName = keyof typeof Icons;

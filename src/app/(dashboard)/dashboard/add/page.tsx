@@ -1,13 +1,16 @@
 import DashboardContent from "@/components/dashboard-content";
 import DashboardHeader from "@/components/dashboard-header";
-import FetchVideoDetailsForm from "@/components/fetch-video-details-form";
+import FetchVideoDetails from "@/components/fetch-video-details";
 
 export default function Add() {
   return (
     <div>
-      <DashboardHeader title="Add" subheading="Add a new video to your account" />
+      <DashboardHeader
+        title="Add Video"
+        subheading="Add a new video to your account"
+      />
       <DashboardContent>
-        <FetchVideoDetailsForm />
+        <FetchVideoDetails />
       </DashboardContent>
     </div>
   );
