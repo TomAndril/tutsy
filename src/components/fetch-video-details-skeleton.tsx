@@ -6,7 +6,7 @@ export default function FetchVideoDetailsSkeleton() {
       <div>
         <Skeleton className="h-12 mb-2" />
       </div>
-      <Skeleton className="h-96" />
+      <Skeleton className="h-60" />
       <div>
         <Skeleton className="h-12 mb-2 mt-2" />
       </div>
