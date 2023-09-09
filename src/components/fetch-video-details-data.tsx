@@ -1,6 +1,7 @@
 import { VideoDetails } from "@/types/video";
 import { Icons } from "./icons";
 import Image from "next/image";
+import { Button } from "./ui/button";
 
 interface Props {
   videoDetails: VideoDetails;
@@ -12,17 +13,17 @@ export default function FetchVideoDetailsData({ videoDetails }: Props) {
       <FetchVideoDetailsData.HasVideoChapters
         chapters={videoDetails.chapters}
       />
-      <div className="grid grid-cols-12 gap-4 mt-2">
+      <div className="grid md:grid-cols-12 gap-4 mt-2">
         <FetchVideoDetailsData.ThumbnailPreview
           thumbnails={videoDetails.thumbnails}
           alt={videoDetails.title}
         />
-        <div className="border col-span-7 p-4 rounded">
-          <div>
-            <FetchVideoDetailsData.VideoTitle title={videoDetails.title} />
-            
-          </div>
+        <div className="border col-span-12 md:col-span-7 p-4 rounded">
+          <FetchVideoDetailsData.VideoTitle title={videoDetails.title} />
         </div>
+      </div>
+      <div className="mt-4 flex justify-end">
+        <Button size="lg">Add</Button>
       </div>
     </div>
   );
@@ -36,7 +37,7 @@ FetchVideoDetailsData.HasVideoChapters = function HasVideoChapters({
   const hasChapters = chapters.length > 0;
 
   return (
-    <div className="border p-4 rounded">
+    <div className="border p-4 rounded text-sm">
       {hasChapters ? (
         <div className="flex items-center">
           <Icons.checkmark color="green" size={18} className="mr-2" />
@@ -60,7 +61,7 @@ FetchVideoDetailsData.ThumbnailPreview = function ThumbnailPreview({
   alt: string;
 }) {
   return (
-    <div className="col-span-5">
+    <div className="col-span-12 md:col-span-5">
       <Image
         className="rounded border w-full"
         src={thumbnails[4].url}
