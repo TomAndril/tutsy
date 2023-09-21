@@ -13,11 +13,6 @@ const dashboardNavItems: DashboardNavItem[] = [
     href: "/dashboard",
   },
   {
-    title: "People",
-    icon: "users",
-    href: "/dashboard/people",
-  },
-  {
     title: "Settings",
     icon: "settings",
     href: "/dashboard/settings",

@@ -1,7 +1,7 @@
 import { VideoDetails } from "@/types/video";
 import { Icons } from "./icons";
 import Image from "next/image";
-import { Button } from "./ui/button";
+import AddVideoToAccount from "./add-video-to-account";
 
 interface Props {
   videoDetails: VideoDetails;
@@ -23,7 +23,7 @@ export default function FetchVideoDetailsData({ videoDetails }: Props) {
         </div>
       </div>
       <div className="mt-4 flex justify-end">
-        <Button size="lg">Add</Button>
+        <AddVideoToAccount videoId={videoDetails.videoId} />
       </div>
     </div>
   );

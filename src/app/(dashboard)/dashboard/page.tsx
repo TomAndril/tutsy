@@ -3,10 +3,15 @@ import DashboardHeader from "@/components/dashboard-header";
 import { Icons } from "@/components/icons";
 import NoVideosPlaceholder from "@/components/no-videos-placeholder";
 import { Button } from "@/components/ui/button";
+import VideoList from "@/components/video-list";
+import { getUserVideos } from "@/lib/videos";
 import Link from "next/link";
 
-export default function Dashboard() {
-  const Icon = Icons["plus"];
+export default async function Dashboard() {
+  const { videos = [] } = await getUserVideos();
+
+  const hasVideos = videos.length > 0;
+
   return (
     <div>
       <DashboardHeader
@@ -15,13 +20,13 @@ export default function Dashboard() {
       >
         <Button size="lg" variant="secondary" asChild>
           <Link href="/dashboard/add">
-            <Icon size={14} className="mr-2" />
+            <Icons.plus size={14} className="mr-2" />
             <span>Add video</span>
           </Link>
         </Button>
       </DashboardHeader>
       <DashboardContent>
-        <NoVideosPlaceholder />
+        {hasVideos ? <VideoList videos={videos} /> : <NoVideosPlaceholder />}
       </DashboardContent>
     </div>
   );

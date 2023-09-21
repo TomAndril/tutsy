@@ -6,6 +6,9 @@ import {
   Search,
   CheckCircle,
   CircleOff,
+  Play,
+  MoreVertical,
+  Loader2,
 } from "lucide-react";
 
 export const Icons = {
@@ -16,6 +19,9 @@ export const Icons = {
   search: Search,
   checkmark: CheckCircle,
   off: CircleOff,
+  play: Play,
+  more: MoreVertical,
+  loader: Loader2,
 };
 
 export type IconName = keyof typeof Icons;

@@ -1,14 +1,35 @@
+import { db } from "@/lib/db";
+import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
-import ytdl from "ytdl-core";
 
-export async function POST(req: Request) {
-  const { name } = await req.json();
+export async function GET() {
+  const session = await getServerSession();
 
-  const videoDetails = await ytdl.getBasicInfo(
-    "https://www.youtube.com/watch?v=xirQ7AMyTM8"
+  const user = await db.user.findUnique({
+    where: {
+      email: session?.user?.email ?? "",
+    },
+  });
+
+  const userVideos = await db.video.findMany({
+    where: {
+      userId: user?.id,
+    },
+  });
+
+  const userVideosWithChapters = await Promise.all(
+    userVideos.map(async (video) => {
+      const chapters = await db.chapter.findMany({
+        where: {
+          videoId: video.id,
+        },
+      });
+      return {
+        ...video,
+        chapters,
+      };
+    })
   );
 
-  console.log(videoDetails);
-
-  return NextResponse.json({ details: videoDetails });
+  return NextResponse.json({ videos: userVideosWithChapters });
 }
