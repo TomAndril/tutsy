@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 
 export default function useFetchVideoDetails(videoUrl: string) {
   const { toast } = useToast();
-  const { data, isError, refetch, isFetching } = useQuery({
+  return useQuery({
     queryFn: () =>
       getVideoDetails(videoUrl).catch(() => {
         toast({
@@ -16,6 +16,4 @@ export default function useFetchVideoDetails(videoUrl: string) {
     queryKey: ["video-details", videoUrl],
     enabled: false,
   });
-
-  return { data, isFetching, isError, refetch };
 }

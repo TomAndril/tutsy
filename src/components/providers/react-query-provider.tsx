@@ -7,7 +7,13 @@ interface Props {
   children: React.ReactNode;
 }
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+    },
+  },
+});
 
 export default function ReactQueryWrapper({ children }: Props) {
   return (

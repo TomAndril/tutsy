@@ -3,7 +3,6 @@ import { getCurrentUser } from "@/lib/session";
 
 import DashboardAside from "@/components/dashboard-aside";
 import Navbar from "@/components/navbar";
-import ReactQueryProvider from "@/components/providers/react-query-provider";
 
 interface DashboardLayoutProps {
   children: React.ReactNode;
@@ -29,14 +28,12 @@ export default async function DashboardLayout({
   }
 
   return (
-    <ReactQueryProvider>
-      <div className="container">
-        <Navbar />
-        <div className="grid flex-1 md:grid-cols-[200px_1fr] mt-8 gap-12">
-          <DashboardAside />
-          {children}
-        </div>
+    <div className="container">
+      <Navbar />
+      <div className="grid flex-1 md:grid-cols-[200px_1fr] mt-8 gap-12">
+        <DashboardAside />
+        {children}
       </div>
-    </ReactQueryProvider>
+    </div>
   );
 }
