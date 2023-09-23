@@ -36,16 +36,10 @@ export async function POST(req: NextRequest) {
 
     const session = await getServerSession(authOptions);
 
-    const dbUserId = await db.user.findUnique({
-      where: {
-        email: session?.user?.email ?? "",
-      },
-    });
-
     const videoAlreadyExists = await db.video.findUnique({
       where: {
         id: videoId,
-        userId: dbUserId?.id,
+        userId: session?.user.id,
       },
     });
 
@@ -63,7 +57,7 @@ export async function POST(req: NextRequest) {
     await db.video.create({
       data: {
         id: videoId,
-        userId: dbUserId?.id,
+        userId: session?.user.id,
         title: videoDetails.title,
         youtubeURL: videoDetails.video_url,
         chapters: {
@@ -100,16 +94,10 @@ export async function DELETE(req: NextRequest) {
 
     const session = await getServerSession(authOptions);
 
-    const dbUserId = await db.user.findUnique({
-      where: {
-        email: session?.user?.email ?? "",
-      },
-    });
-
     const video = await db.video.findUnique({
       where: {
         id: videoId,
-        userId: dbUserId?.id,
+        userId: session?.user.id,
       },
     });
 

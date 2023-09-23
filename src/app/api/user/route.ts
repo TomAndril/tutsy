@@ -5,15 +5,9 @@ import { NextResponse } from "next/server";
 export async function GET() {
   const session = await getServerSession();
 
-  const user = await db.user.findUnique({
-    where: {
-      email: session?.user?.email ?? "",
-    },
-  });
-
   const userVideos = await db.video.findMany({
     where: {
-      userId: user?.id,
+      userId: session?.user.id,
     },
   });
 
