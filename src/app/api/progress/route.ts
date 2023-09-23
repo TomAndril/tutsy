@@ -10,16 +10,10 @@ export async function GET(req: NextRequest) {
 
   const session = await getServerSession(authOptions);
 
-  const userId = await db.user.findUnique({
-    where: {
-      email: session?.user?.email ?? "",
-    },
-  });
-
   const userVideo = await db.video.findUnique({
     where: {
       id: videoId,
-      userId: userId?.id,
+      userId: session?.user.id,
     },
   });
 
