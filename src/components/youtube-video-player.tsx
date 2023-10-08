@@ -71,7 +71,7 @@ export default function YoutubeVideoPlayer({ video }: Props) {
                     className="w-full flex justify-start text-xs truncate rounded-none"
                     onClick={() => handleJumpToChapter(chapter.startTime)}
                   >
-                    <span className="mr-2">
+                    <span className="w-12 justify-start">
                       {secondsToMinutes(chapter.startTime)}
                     </span>
                     {chapter.title}

@@ -21,7 +21,8 @@ const getVideoId = (url: string) => {
 
 export const secondsToMinutes = (seconds: number) => {
   const minutes = Math.floor(seconds / 60);
-  const remainingSeconds = seconds % 60;
+  const remainingSeconds =
+    String(seconds % 60).length === 1 ? `0${seconds % 60}` : seconds % 60;
   return `${minutes}:${remainingSeconds}`;
 };
 
