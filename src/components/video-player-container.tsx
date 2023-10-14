@@ -8,9 +8,5 @@ interface Props {
 }
 
 export default function VideoPlayerContainer({ video }: Props) {
-  return (
-    <div>
-      <YoutubeVideoPlayer video={video} />
-    </div>
-  );
+  return <YoutubeVideoPlayer video={video} />;
 }

@@ -62,6 +62,7 @@ model Video {
   User       User?     @relation(fields: [userId], references: [id])
   userId     String?
   completed  Boolean   @default(false)
+  duration   Int
 }
 
 model Chapter {

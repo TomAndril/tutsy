@@ -66,6 +66,7 @@ export async function POST(req: NextRequest) {
             startTime: chapter.start_time,
           })),
         },
+        duration: Number(videoDetails.lengthSeconds),
       },
     });
 

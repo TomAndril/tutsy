@@ -20,10 +20,21 @@ const getVideoId = (url: string) => {
 };
 
 export const secondsToMinutes = (seconds: number) => {
+  if (seconds === 0) return "Start";
+
   const minutes = Math.floor(seconds / 60);
-  const remainingSeconds =
-    String(seconds % 60).length === 1 ? `0${seconds % 60}` : seconds % 60;
+  const remainingSeconds = String(Math.floor(seconds % 60)).padStart(2, "0");
   return `${minutes}:${remainingSeconds}`;
+};
+
+export const secondsToHoursAndMinutes = (seconds: number) => {
+  if (seconds === 0) return "Start";
+
+  const hours = Math.floor(seconds / 3600);
+  const minutes = String(Math.floor((seconds % 3600) / 60)).padStart(2, "0");
+  const remainingSeconds = String(Math.floor(seconds % 60)).padStart(2, "0");
+
+  return `${hours}:${minutes}:${remainingSeconds}`;
 };
 
 export { getFirstWord, getFirstLetter, capitalize, getVideoId };

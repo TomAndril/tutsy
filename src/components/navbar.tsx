@@ -10,9 +10,6 @@ export default function Navbar() {
           <Button asChild variant="link">
             <Link href="/">Tuti</Link>
           </Button>
-          <Button asChild variant="link">
-            <Link href="/explore">Explore</Link>
-          </Button>
         </div>
         <NavBarRightSide />
       </nav>
