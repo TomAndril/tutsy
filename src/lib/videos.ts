@@ -1,6 +1,7 @@
 import axios from "axios";
 import { getHost } from "./env";
 import { VideoWithChapters } from "@/types/video";
+import { Chapter } from "@prisma/client";
 
 export async function addVideoToUserAccount(videoId: string) {
   await axios.post(getHost() + "/api/video", {
@@ -27,5 +28,17 @@ export async function deleteVideoFromUserAccount(videoId: string) {
     data: {
       videoId,
     },
+  });
+}
+
+export async function resetVideoProgress(videoId: string) {
+  await axios.put(getHost() + "/api/progress", {
+    videoId,
+  });
+}
+
+export async function updateChapterStatus(chapter: Chapter) {
+  await axios.patch(getHost() + "/api/progress", {
+    chapterId: chapter.id,
   });
 }

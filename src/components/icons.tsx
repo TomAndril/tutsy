@@ -9,6 +9,7 @@ import {
   Play,
   MoreVertical,
   Loader2,
+  Check,
 } from "lucide-react";
 
 export const Icons = {
@@ -22,6 +23,7 @@ export const Icons = {
   play: Play,
   more: MoreVertical,
   loader: Loader2,
+  check: Check,
 };
 
 export type IconName = keyof typeof Icons;

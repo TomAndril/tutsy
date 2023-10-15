@@ -17,14 +17,14 @@ export async function generateMetadata({ params: { id } }: PageProps) {
 }
 
 export default async function PlayerPage({ params: { id } }: PageProps) {
-  const video = await getUserVideoById(id);
+  const initialData = await getUserVideoById(id);
 
   return (
     <>
       <div className="container">
         <Navbar />
       </div>
-      <VideoPlayerContainer video={video} />
+      <VideoPlayerContainer video={initialData} />
     </>
   );
 }
