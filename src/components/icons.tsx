@@ -10,6 +10,7 @@ import {
   MoreVertical,
   Loader2,
   Check,
+  Info,
 } from "lucide-react";
 
 export const Icons = {
@@ -24,6 +25,7 @@ export const Icons = {
   more: MoreVertical,
   loader: Loader2,
   check: Check,
+  info: Info,
 };
 
 export type IconName = keyof typeof Icons;

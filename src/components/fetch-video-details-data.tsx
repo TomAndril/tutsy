@@ -2,6 +2,12 @@ import { VideoDetails } from "@/types/video";
 import { Icons } from "./icons";
 import Image from "next/image";
 import AddVideoToAccount from "./add-video-to-account";
+import {
+  Tooltip,
+  TooltipProvider,
+  TooltipTrigger,
+  TooltipContent,
+} from "./ui/tooltip";
 
 interface Props {
   videoDetails: VideoDetails;
@@ -45,8 +51,29 @@ FetchVideoDetailsData.HasVideoChapters = function HasVideoChapters({
         </div>
       ) : (
         <div className="flex items-center">
-          <Icons.off color="red" size={18} className="mr-2" />
-          <span>This video has no chapters</span>
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <div className="flex items-center">
+                  <Icons.info size={16} className="mr-2 text-red-400" />
+                  <span>This video has no chapters</span>
+                </div>
+              </TooltipTrigger>
+              <TooltipContent className="max-w-sm p-4">
+                <div>
+                  <p>
+                    This video has no chapters so you can&apos;t use the player
+                    to jump to specific parts of the video.{" "}
+                  </p>
+                  <p className="mt-2">
+                    You can still use the player to play the video, but
+                    you&apos;ll have to manually skip to the parts you want to
+                    watch.
+                  </p>
+                </div>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
         </div>
       )}
     </div>
