@@ -9,6 +9,13 @@ import { useRef, useState } from "react";
 import { Skeleton } from "./ui/skeleton";
 import { ScrollArea } from "./ui/scroll-area";
 import { Icons } from "./icons";
+import useUpdateChapterStatus from "@/hooks/use-update-chapter-status";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "./ui/tooltip";
 
 interface Props {
   video: VideoWithChapters;
@@ -25,8 +32,28 @@ export default function YoutubeVideoPlayer({ video }: Props) {
     setIsPlaying(true);
   };
 
-  const hasChapters = video.chapters.length > 0;
+  const handleUpdateChapter = (playedSeconds: number) => {
+    const currentChapterIndex =
+      video.chapters.findIndex((c) => c.startTime >= playedSeconds) - 1;
+
+    const nextChapterStartTime =
+      video.chapters?.[currentChapterIndex + 1]?.startTime;
+
+    const hasToUpdateChapter =
+      !video.chapters[currentChapterIndex]?.completed &&
+      nextChapterStartTime - playedSeconds < 3 &&
+      playedSeconds > 5;
+
+    if (hasToUpdateChapter && !isLoading) {
+      mutate(video.chapters[currentChapterIndex]);
+    }
+  };
+
+  const { mutate, isLoading } = useUpdateChapterStatus(video);
+
+  const hasChapters = video.chapters?.length > 0;
   const hasLessThanOneHour = video.duration < 3600;
+
   return (
     <div
       className={cn("grid grid-cols-1 border-t border-b", {
@@ -37,6 +64,7 @@ export default function YoutubeVideoPlayer({ video }: Props) {
         <ReactPlayer
           ref={playerRef}
           playing={isPlaying}
+          onProgress={({ playedSeconds }) => handleUpdateChapter(playedSeconds)}
           onReady={() => setIsVideoReady(true)}
           id={video.id}
           width={"100%"}
@@ -69,7 +97,7 @@ export default function YoutubeVideoPlayer({ video }: Props) {
                 <Button
                   variant="ghost"
                   size="lg"
-                  className="text-xs rounded-none w-full justify-between px-4 lg:px-8"
+                  className="text-xs rounded-none w-full justify-start px-4 lg:px-8"
                   onClick={() => handleJumpToChapter(chapter.startTime)}
                 >
                   <span className="w-10 text-slate-400">
@@ -80,7 +108,19 @@ export default function YoutubeVideoPlayer({ video }: Props) {
                   <span className="text-left w-full lg:w-96 lg:truncate px-4">
                     {chapter.title}
                   </span>
-                  {chapter.completed && <Icons.checkmark size={18} />}
+                  {chapter.completed && (
+                    <TooltipProvider>
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <Icons.check
+                            size={18}
+                            className="text-green-600 dark:text-green-300"
+                          />
+                        </TooltipTrigger>
+                        <TooltipContent>Chapter completed</TooltipContent>
+                      </Tooltip>
+                    </TooltipProvider>
+                  )}
                 </Button>
                 <Separator />
               </div>

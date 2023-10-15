@@ -24,6 +24,7 @@ import {
 import { AlertDialogAction } from "@radix-ui/react-alert-dialog";
 import useDeleteVideoFromAccount from "@/hooks/use-delete-video-from-account";
 import { useRouter } from "next/navigation";
+import useResetVideoProgress from "@/hooks/use-reset-video-progress";
 
 interface Props {
   videos: VideoWithChapters[];
@@ -35,6 +36,7 @@ export default function VideoList({ videos }: Props) {
   const [selectedVideoId, setSelectedVideoId] = useState<string | null>(null);
 
   const deleteVideoMutation = useDeleteVideoFromAccount();
+  const resetProgressMutation = useResetVideoProgress();
 
   const router = useRouter();
 
@@ -95,8 +97,23 @@ export default function VideoList({ videos }: Props) {
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogAction className="text-destructive">
-              Reset
+            <AlertDialogAction
+              className="text-destructive"
+              onClick={async (e) => {
+                e.preventDefault();
+                await resetProgressMutation.mutateAsync(
+                  selectedVideoId as string
+                );
+
+                setShowResetProgressDialog(false);
+              }}
+            >
+              <div className="flex items-center">
+                {resetProgressMutation.isLoading && (
+                  <Icons.loader className="animate-spin mr-2" />
+                )}{" "}
+                Reset progress
+              </div>
             </AlertDialogAction>
             <AlertDialogCancel>Cancel</AlertDialogCancel>
           </AlertDialogFooter>

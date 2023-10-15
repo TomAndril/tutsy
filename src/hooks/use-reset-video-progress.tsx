@@ -1,13 +1,11 @@
-import { useToast } from "@/components/ui/use-toast";
-import { deleteVideoFromUserAccount } from "@/lib/videos";
+import { toast } from "@/components/ui/use-toast";
+import { resetVideoProgress } from "@/lib/videos";
 import { useMutation } from "@tanstack/react-query";
 
-export default function useDeleteVideoFromAccount() {
-  const { toast } = useToast();
-
+export default function useResetVideoProgress() {
   return useMutation({
     mutationFn: (videoId: string) =>
-      deleteVideoFromUserAccount(videoId).catch((e) =>
+      resetVideoProgress(videoId).catch((e) =>
         toast({
           variant: "default",
           title: "Something went wrong",
@@ -22,9 +20,9 @@ export default function useDeleteVideoFromAccount() {
       }),
     onSuccess: () =>
       toast({
-        title: "Video deleted",
         variant: "default",
-        description: "The video was deleted from your account",
+        title: "Updated",
+        description: "Your progress has been reset",
       }),
   });
 }

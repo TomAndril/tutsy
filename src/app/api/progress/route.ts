@@ -21,9 +21,42 @@ export async function GET(req: NextRequest) {
     where: {
       videoId: userVideo?.id,
     },
+    orderBy: {
+      startTime: "asc",
+    },
   });
   return NextResponse.json({
     ...userVideo,
     chapters: videoChapters,
   });
+}
+
+export async function PATCH(req: NextRequest) {
+  const { chapterId } = await req.json();
+
+  const mutation = await db.chapter.update({
+    where: {
+      id: chapterId,
+    },
+    data: {
+      completed: true,
+    },
+  });
+
+  return NextResponse.json({ data: mutation });
+}
+
+export async function PUT(req: NextRequest) {
+  const { videoId } = await req.json();
+
+  const mutation = await db.chapter.updateMany({
+    where: {
+      videoId,
+    },
+    data: {
+      completed: false,
+    },
+  });
+
+  return NextResponse.json({ data: mutation });
 }
