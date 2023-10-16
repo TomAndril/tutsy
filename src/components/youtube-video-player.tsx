@@ -114,7 +114,7 @@ export default function YoutubeVideoPlayer({ video }: Props) {
                         <TooltipTrigger asChild>
                           <Icons.check
                             size={18}
-                            className="text-green-600 dark:text-green-300"
+                            className="text-green-600 dark:text-green-400"
                           />
                         </TooltipTrigger>
                         <TooltipContent>Chapter completed</TooltipContent>
