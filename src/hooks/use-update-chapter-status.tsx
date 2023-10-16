@@ -18,8 +18,6 @@ export default function useUpdateChapterStatus(video: VideoWithChapters) {
         video.id,
       ]);
 
-      console.log("called");
-
       queryClient.setQueryData<VideoWithChapters>(["user-video", video.id], {
         ...video,
         chapters: video.chapters.map((c) =>
