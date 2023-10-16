@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 const youtubeVideoRegex =
-  /^(https?\:\/\/)?(www\.)?(youtube\.com|youtu\.?be)\/.+$/gim;
+  /^(https?\:\/\/)?(www\.)?(youtube\.com|youtu\.?be)\/(watch\?v=)?([a-zA-Z0-9_-]{11})$/;
 
 export const addVideoSchema = z.object({
   videoUrl: z
