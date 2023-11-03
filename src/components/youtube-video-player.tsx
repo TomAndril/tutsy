@@ -36,6 +36,15 @@ export default function YoutubeVideoPlayer({ video }: Props) {
     const currentChapterIndex =
       video.chapters.findIndex((c) => c.startTime >= playedSeconds) - 1;
 
+    // If the video is almost finished, mark the last chapter as completed
+    if (
+      video.duration - playedSeconds < 3 &&
+      !isPending &&
+      !video.chapters[video.chapters.length - 1]?.completed
+    ) {
+      return mutate(video.chapters[video.chapters.length - 1]);
+    }
+
     const nextChapterStartTime =
       video.chapters?.[currentChapterIndex + 1]?.startTime;
 
