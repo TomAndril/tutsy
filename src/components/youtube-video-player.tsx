@@ -44,12 +44,12 @@ export default function YoutubeVideoPlayer({ video }: Props) {
       nextChapterStartTime - playedSeconds < 3 &&
       playedSeconds > 5;
 
-    if (hasToUpdateChapter && !isLoading) {
+    if (hasToUpdateChapter && !isPending) {
       mutate(video.chapters[currentChapterIndex]);
     }
   };
 
-  const { mutate, isLoading } = useUpdateChapterStatus(video);
+  const { mutate, isPending, variables } = useUpdateChapterStatus(video);
 
   const hasChapters = video.chapters?.length > 0;
   const hasLessThanOneHour = video.duration < 3600;
@@ -108,6 +108,12 @@ export default function YoutubeVideoPlayer({ video }: Props) {
                   <span className="text-left w-full lg:w-96 lg:truncate px-4">
                     {chapter.title}
                   </span>
+                  {isPending && variables?.id === chapter.id && (
+                    <Icons.check
+                      size={18}
+                      className="text-slate-600 dark:text-slate-400"
+                    />
+                  )}
                   {chapter.completed && (
                     <TooltipProvider>
                       <Tooltip>
