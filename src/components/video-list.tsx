@@ -109,7 +109,7 @@ export default function VideoList({ videos }: Props) {
               }}
             >
               <div className="flex items-center">
-                {resetProgressMutation.isLoading && (
+                {resetProgressMutation.isPending && (
                   <Icons.loader className="animate-spin mr-2" />
                 )}{" "}
                 Reset progress
@@ -143,7 +143,7 @@ export default function VideoList({ videos }: Props) {
               }}
             >
               <div className="flex items-center">
-                {deleteVideoMutation.isLoading && (
+                {deleteVideoMutation.isPending && (
                   <Icons.loader className="animate-spin mr-2" />
                 )}{" "}
                 Delete

@@ -27,10 +27,10 @@ export default function AddVideoToAccount({ videoId }: Props) {
     <Button
       size="lg"
       onClick={handleAddVideoToAccount}
-      disabled={mutation.isLoading}
+      disabled={mutation.isPending}
     >
       <div className="flex">
-        {mutation.isLoading && <Icons.loader className="animate-spin mr-2" />}{" "}
+        {mutation.isPending && <Icons.loader className="animate-spin mr-2" />}{" "}
         Add
       </div>
     </Button>
