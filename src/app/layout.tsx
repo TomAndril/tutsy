@@ -1,13 +1,11 @@
 import "@/styles/globals.css";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { GeistSans, GeistMono } from "geist/font";
 
 import NextAuthProvider from "@/components/providers/next-auth-provider";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { Toaster } from "@/components/ui/toaster";
 import ReactQueryWrapper from "@/components/providers/react-query-provider";
-
-const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Tuti",
@@ -21,8 +19,8 @@ export default function RootLayout({
 }) {
   return (
     <NextAuthProvider>
-      <html lang="en">
-        <body className={inter.className}>
+      <html lang="en" className={`${GeistSans.variable} ${GeistMono.variable}`}>
+        <body>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             <ReactQueryWrapper>
               {children}

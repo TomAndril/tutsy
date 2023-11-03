@@ -7,7 +7,7 @@ export default function Navbar() {
     <div>
       <nav className="flex items-center justify-between h-16 text-sm">
         <div className="-ml-4">
-          <Button asChild variant="link">
+          <Button asChild variant="link" className="font-mono">
             <Link href="/">Tuti</Link>
           </Button>
         </div>
