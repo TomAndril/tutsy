@@ -101,6 +101,13 @@ export default function YoutubeVideoPlayer({ video }: Props) {
           height={"100%"}
           controls
           url={`https://vid.puffyan.us/latest_version?id=${video.id}`}
+          config={{
+            file: {
+              attributes: {
+                controlsList: "nodownload",
+              },
+            },
+          }}
         />
       </div>
       {hasChapters && !isVideoReady && (
