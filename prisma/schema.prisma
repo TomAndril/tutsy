@@ -70,6 +70,7 @@ model Video {
   userId     String?
   completed  Boolean   @default(false)
   duration   Int
+  thumbnail  String    @default("")
 }
 
 model Chapter {
