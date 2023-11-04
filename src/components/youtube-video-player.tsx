@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 import { Separator } from "./ui/separator";
 import { Button } from "./ui/button";
 import { secondsToHoursAndMinutes, secondsToMinutes } from "@/utils";
-import { useRef, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import { Skeleton } from "./ui/skeleton";
 import { ScrollArea } from "./ui/scroll-area";
 import { Icons } from "./icons";
@@ -16,6 +16,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "./ui/tooltip";
+import { Chapter } from "@prisma/client";
 
 interface Props {
   video: VideoWithChapters;
@@ -24,6 +25,11 @@ interface Props {
 export default function YoutubeVideoPlayer({ video }: Props) {
   const [isVideoReady, setIsVideoReady] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [currentChapterTitle, setCurrentChapterTitle] = useState<
+    Chapter["title"] | null
+  >();
+
+  const { mutate, isPending, variables } = useUpdateChapterStatus(video);
 
   const playerRef = useRef<ReactPlayer>(null);
 
@@ -32,33 +38,43 @@ export default function YoutubeVideoPlayer({ video }: Props) {
     setIsPlaying(true);
   };
 
-  const handleUpdateChapter = (playedSeconds: number) => {
-    const currentChapterIndex =
-      video.chapters.findIndex((c) => c.startTime >= playedSeconds) - 1;
+  const handleUpdateChapter = useCallback(
+    (playedSeconds: number) => {
+      const currentChapterIndex =
+        video.chapters.findIndex((c) => c.startTime >= playedSeconds) - 1;
 
-    // If the video is almost finished, mark the last chapter as completed
-    if (
-      video.duration - playedSeconds < 3 &&
-      !isPending &&
-      !video.chapters[video.chapters.length - 1]?.completed
-    ) {
-      return mutate(video.chapters[video.chapters.length - 1]);
-    }
+      const isFinalChapter =
+        playedSeconds >= video.chapters[video.chapters.length - 1].startTime;
 
-    const nextChapterStartTime =
-      video.chapters?.[currentChapterIndex + 1]?.startTime;
+      setCurrentChapterTitle(
+        video.chapters[
+          isFinalChapter ? video.chapters.length - 1 : currentChapterIndex
+        ]?.title
+      );
 
-    const hasToUpdateChapter =
-      !video.chapters[currentChapterIndex]?.completed &&
-      nextChapterStartTime - playedSeconds < 3 &&
-      playedSeconds > 5;
+      // If the video is almost finished, mark the last chapter as completed
+      if (
+        video.duration - playedSeconds < 3 &&
+        !isPending &&
+        !video.chapters[video.chapters.length - 1]?.completed
+      ) {
+        return mutate(video.chapters[video.chapters.length - 1]);
+      }
 
-    if (hasToUpdateChapter && !isPending) {
-      mutate(video.chapters[currentChapterIndex]);
-    }
-  };
+      const nextChapterStartTime =
+        video.chapters?.[currentChapterIndex + 1]?.startTime;
 
-  const { mutate, isPending, variables } = useUpdateChapterStatus(video);
+      const hasToUpdateChapter =
+        !video.chapters[currentChapterIndex]?.completed &&
+        nextChapterStartTime - playedSeconds < 3 &&
+        playedSeconds > 5;
+
+      if (hasToUpdateChapter && !isPending) {
+        mutate(video.chapters[currentChapterIndex]);
+      }
+    },
+    [video.chapters, video.duration, isPending, mutate]
+  );
 
   const hasChapters = video.chapters?.length > 0;
   const hasLessThanOneHour = video.duration < 3600;
@@ -69,7 +85,12 @@ export default function YoutubeVideoPlayer({ video }: Props) {
         "grid-cols-1 lg:grid-cols-[1fr_500px]": hasChapters,
       })}
     >
-      <div className="max-h-[80vh] border-r">
+      <div className="max-h-[80vh] border-r relative group">
+        {hasChapters && !!currentChapterTitle && (
+          <div className="absolute left-8 top-4 text-sm opacity-0 group-hover:opacity-100 transition-all px-4 rounded backdrop-blur shadow py-2 border">
+            {currentChapterTitle}
+          </div>
+        )}
         <ReactPlayer
           ref={playerRef}
           playing={isPlaying}

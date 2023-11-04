@@ -9,7 +9,7 @@ import ReactQueryWrapper from "@/components/providers/react-query-provider";
 
 export const metadata: Metadata = {
   title: "Tuti",
-  description: "A simple app to help you learn new things.",
+  description: "Learn new things for free",
 };
 
 export default function RootLayout({
