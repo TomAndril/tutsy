@@ -32,8 +32,8 @@ import { Button } from "./ui/button";
 import { useState } from "react";
 import useDeleteVideoFromAccount from "@/hooks/use-delete-video-from-account";
 import useResetVideoProgress from "@/hooks/use-reset-video-progress";
-import { useRouter } from "next/navigation";
 import VideoProgressBar from "./video-progress-bar";
+import { useQueryClient } from "@tanstack/react-query";
 
 interface Props {
   video: VideoWithChapters;
@@ -48,7 +48,7 @@ export default function VideoListCard({ video }: Props) {
   const deleteVideoMutation = useDeleteVideoFromAccount();
   const resetProgressMutation = useResetVideoProgress();
 
-  const router = useRouter();
+  const queryClient = useQueryClient();
 
   return (
     <div className="relative group">
@@ -128,6 +128,9 @@ export default function VideoListCard({ video }: Props) {
                 );
 
                 setShowResetProgressDialog(false);
+                queryClient.invalidateQueries({
+                  queryKey: ["user-videos"],
+                });
               }}
             >
               <div className="flex items-center">
@@ -161,7 +164,9 @@ export default function VideoListCard({ video }: Props) {
                   selectedVideoId as string
                 );
                 setShowDeleteDialog(false);
-                router.refresh();
+                queryClient.invalidateQueries({
+                  queryKey: ["user-videos"],
+                });
               }}
             >
               <div className="flex items-center">
