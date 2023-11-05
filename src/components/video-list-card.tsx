@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import { VideoWithChapters } from "@/types/video";
 import {
@@ -33,6 +33,7 @@ import { useState } from "react";
 import useDeleteVideoFromAccount from "@/hooks/use-delete-video-from-account";
 import useResetVideoProgress from "@/hooks/use-reset-video-progress";
 import { useRouter } from "next/navigation";
+import VideoProgressBar from "./video-progress-bar";
 
 interface Props {
   video: VideoWithChapters;
@@ -99,7 +100,7 @@ export default function VideoListCard({ video }: Props) {
             <CardDescription>{video.author}</CardDescription>
           </CardHeader>
           <CardContent>
-            <div>Progress stuff</div>
+            <VideoProgressBar chapters={video.chapters} />
           </CardContent>
         </Card>
       </Link>

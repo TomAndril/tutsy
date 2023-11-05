@@ -37,4 +37,11 @@ export const secondsToHoursAndMinutes = (seconds: number) => {
   return `${hours}:${minutes}:${remainingSeconds}`;
 };
 
+export const calculatePercentage = (
+  partialValue: number,
+  totalValue: number
+) => {
+  return (100 * partialValue) / totalValue;
+};
+
 export { getFirstWord, getFirstLetter, capitalize, getVideoId };
