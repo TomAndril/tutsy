@@ -16,6 +16,7 @@ export default function VideoProgressBar({ chapters }: Props) {
   }, 0);
 
   const [progress, setProgress] = useState(0);
+
   const totalChapters = chapters.length;
 
   useEffect(() => {
@@ -24,14 +25,17 @@ export default function VideoProgressBar({ chapters }: Props) {
     );
     return () => clearTimeout(timer);
   }, [chaptersWatched, totalChapters]);
-  return (
-    <>
-      <span className="text-xs">
-        {totalChapters
-          ? `Watched ${chaptersWatched} out of ${totalChapters} chapters`
-          : `This video has no chapters`}
-      </span>
-      <Progress value={progress} />
-    </>
-  );
+
+  if (totalChapters) {
+    return (
+      <div>
+        <span className="text-xs">
+          {chaptersWatched} of {totalChapters} chapters watched
+        </span>
+        <Progress value={progress} />
+      </div>
+    );
+  }
+
+  return <span className="text-xs">This video has no chapters</span>;
 }

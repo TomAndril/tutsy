@@ -1,16 +1,12 @@
-import DashboardContent from "@/components/dashboard-content";
-import DashboardHeader from "@/components/dashboard-header";
-import { Icons } from "@/components/icons";
-import NoVideosPlaceholder from "@/components/no-videos-placeholder";
-import { Button } from "@/components/ui/button";
-import VideoList from "@/components/video-list";
-import { getUserVideos } from "@/lib/videos";
 import Link from "next/link";
+import DashboardHeader from "@/components/dashboard-header";
+import DashboardVideosContainer from "@/components/dashboard-videos-container";
+import { Icons } from "@/components/icons";
+import { Button } from "@/components/ui/button";
+import { getUserVideos } from "@/lib/videos";
 
 export default async function Dashboard() {
   const { videos = [] } = await getUserVideos();
-
-  const hasVideos = videos.length > 0;
 
   return (
     <div>
@@ -25,9 +21,7 @@ export default async function Dashboard() {
           </Link>
         </Button>
       </DashboardHeader>
-      <DashboardContent>
-        {hasVideos ? <VideoList videos={videos} /> : <NoVideosPlaceholder />}
-      </DashboardContent>
+      <DashboardVideosContainer videos={videos} />
     </div>
   );
 }

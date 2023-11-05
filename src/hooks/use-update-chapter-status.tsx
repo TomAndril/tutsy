@@ -1,3 +1,4 @@
+import { QueryKeys } from "@/constants";
 import { updateChapterStatus } from "@/lib/videos";
 import { VideoWithChapters } from "@/types/video";
 import { Chapter } from "@prisma/client";
@@ -10,7 +11,7 @@ export default function useUpdateChapterStatus(video: VideoWithChapters) {
     mutationFn: (chapter: Chapter) => updateChapterStatus(chapter),
     onSettled: async () => {
       return await queryClient.invalidateQueries({
-        queryKey: ["user-video", video.id],
+        queryKey: [QueryKeys.VIDEO, video.id],
       });
     },
   });

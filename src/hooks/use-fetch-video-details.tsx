@@ -1,4 +1,5 @@
 import { useToast } from "@/components/ui/use-toast";
+import { QueryKeys } from "@/constants";
 import { getVideoDetails } from "@/lib/api";
 import { useQuery } from "@tanstack/react-query";
 
@@ -13,7 +14,7 @@ export default function useFetchVideoDetails(videoUrl: string) {
           description: "Please try again later",
         });
       }),
-    queryKey: ["video-details", videoUrl],
+    queryKey: [QueryKeys.VIDEO_DETAILS, videoUrl],
     enabled: false,
   });
 }
