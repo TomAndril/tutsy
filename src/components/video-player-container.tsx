@@ -4,6 +4,7 @@ import { VideoWithChapters } from "@/types/video";
 import YoutubeVideoPlayer from "./youtube-video-player";
 import { useQuery } from "@tanstack/react-query";
 import { getUserVideoById } from "@/lib/videos";
+import { QueryKeys } from "@/constants";
 
 interface Props {
   video: VideoWithChapters;
@@ -11,7 +12,7 @@ interface Props {
 
 export default function VideoPlayerContainer({ video }: Props) {
   const { data } = useQuery({
-    queryKey: ["user-video", video.id],
+    queryKey: [QueryKeys.VIDEO, video.id],
     queryFn: () => getUserVideoById(video.id),
     initialData: video,
   });

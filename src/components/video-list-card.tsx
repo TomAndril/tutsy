@@ -34,6 +34,7 @@ import useDeleteVideoFromAccount from "@/hooks/use-delete-video-from-account";
 import useResetVideoProgress from "@/hooks/use-reset-video-progress";
 import VideoProgressBar from "./video-progress-bar";
 import { useQueryClient } from "@tanstack/react-query";
+import { QueryKeys } from "@/constants";
 
 interface Props {
   video: VideoWithChapters;
@@ -129,7 +130,7 @@ export default function VideoListCard({ video }: Props) {
 
                 setShowResetProgressDialog(false);
                 queryClient.invalidateQueries({
-                  queryKey: ["user-videos"],
+                  queryKey: [QueryKeys.ALL_VIDEOS],
                 });
               }}
             >
@@ -165,7 +166,7 @@ export default function VideoListCard({ video }: Props) {
                 );
                 setShowDeleteDialog(false);
                 queryClient.invalidateQueries({
-                  queryKey: ["user-videos"],
+                  queryKey: [QueryKeys.ALL_VIDEOS],
                 });
               }}
             >
