@@ -1,4 +1,5 @@
 import NavBarRightSide from "./navbar-right-side";
+import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
 import Link from "next/link";
 
@@ -18,6 +19,7 @@ export default function Navbar({ borderBottom = false }: Props) {
           <Button asChild variant="link" className="font-mono">
             <Link href="/">Tuti</Link>
           </Button>
+          <Badge variant="secondary">BETA</Badge>
         </div>
         <NavBarRightSide />
       </nav>
