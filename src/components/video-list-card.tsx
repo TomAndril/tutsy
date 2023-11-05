@@ -88,7 +88,7 @@ export default function VideoListCard({ video }: Props) {
         </DropdownMenu>
       </div>
       <Link href={`/player/${video.id}`}>
-        <Card className="min-w-[300px] h-full">
+        <Card className="min-w-[220px] h-full">
           <Image
             alt={video.title}
             src={video.thumbnail}
