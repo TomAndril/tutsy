@@ -28,12 +28,14 @@ export default async function DashboardLayout({
   }
 
   return (
-    <div className="container">
-      <Navbar />
-      <div className="grid flex-1 md:grid-cols-[200px_1fr] mt-8 gap-12">
-        <DashboardAside />
-        {children}
+    <>
+      <Navbar borderBottom />
+      <div className="container">
+        <div className="grid flex-1 md:grid-cols-[200px_1fr] mt-8 gap-12">
+          <DashboardAside />
+          {children}
+        </div>
       </div>
-    </div>
+    </>
   );
 }

@@ -21,9 +21,7 @@ export default async function PlayerPage({ params: { id } }: PageProps) {
 
   return (
     <>
-      <div className="container">
-        <Navbar />
-      </div>
+      <Navbar />
       <VideoPlayerContainer video={initialData} />
     </>
   );
