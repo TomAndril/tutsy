@@ -71,6 +71,7 @@ model Video {
   completed  Boolean   @default(false)
   duration   Int
   thumbnail  String    @default("")
+  author     String
 }
 
 model Chapter {

@@ -67,7 +67,8 @@ export async function POST(req: NextRequest) {
           })),
         },
         duration: Number(videoDetails.lengthSeconds),
-        thumbnail: videoDetails.thumbnails[2].url,
+        thumbnail: videoDetails.thumbnails[3].url,
+        author: videoDetails.author.name,
       },
     });
 
