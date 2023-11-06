@@ -44,4 +44,6 @@ export const calculatePercentage = (
   return (100 * partialValue) / totalValue;
 };
 
+export const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+
 export { getFirstWord, getFirstLetter, capitalize, getVideoId };

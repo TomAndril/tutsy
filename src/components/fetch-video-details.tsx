@@ -53,12 +53,14 @@ export default function FetchVideoDetails() {
                   <FormControl>
                     <div className="flex w-full items-center">
                       <Input
+                        data-testid="add-video-input"
                         disabled={isFetching}
                         className="rounded-tr-none rounded-br-none"
                         placeholder="Paste youtube URL"
                         {...field}
                       />
                       <Button
+                        data-testid="search-video-button"
                         disabled={isFetching}
                         className="rounded-bl-none rounded-tl-none"
                         type="submit"

@@ -15,7 +15,10 @@ interface Props {
 
 export default function FetchVideoDetailsData({ videoDetails }: Props) {
   return (
-    <div className="mt-2 border-dashed border rounded p-4">
+    <div
+      className="mt-2 border-dashed border rounded p-4"
+      data-testid="add-video-fetched-data"
+    >
       <FetchVideoDetailsData.HasVideoChapters
         chapters={videoDetails.chapters}
       />
@@ -91,7 +94,7 @@ FetchVideoDetailsData.ThumbnailPreview = function ThumbnailPreview({
     <div className="col-span-12 md:col-span-5">
       <Image
         className="rounded border w-full"
-        src={thumbnails[4].url}
+        src={thumbnails[3].url}
         alt={alt}
         width={480}
         height={240}

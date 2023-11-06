@@ -9,7 +9,7 @@ export default async function Dashboard() {
   const { videos = [] } = await getUserVideos();
 
   return (
-    <div>
+    <div data-testid='dashboard-videos'>
       <DashboardHeader
         title="Videos"
         subheading="Browse your videos and add new ones"

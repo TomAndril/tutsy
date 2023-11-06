@@ -28,6 +28,7 @@ export default function AddVideoToAccount({ videoId }: Props) {
       size="lg"
       onClick={handleAddVideoToAccount}
       disabled={mutation.isPending}
+      data-testid="add-video-button"
     >
       <div className="flex">
         {mutation.isPending && <Icons.loader className="animate-spin mr-2" />}{" "}
