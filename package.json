@@ -54,6 +54,7 @@
     "zod": "^3.21.4"
   },
   "devDependencies": {
+    "@playwright/test": "^1.39.0",
     "@tanstack/react-query-devtools": "^5.4.3",
     "open-browser": "^3.6.0",
     "prisma": "^5.4.1"
