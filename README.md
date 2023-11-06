@@ -4,15 +4,17 @@ Tuti is a youtube video tracker that lets you study for free by watching top cla
 
 ## Getting started
 
-Make sure you have `PostgreSQL` installed. If not. Download it [here](https://www.postgresql.org/download/)
+Make sure you have `MySQL` installed. If not. Download it [here](https://dev.mysql.com/downloads/installer/)
 
-Open `pgAdmin` and create an empty database, name it `tuti-prisma`
+Open `mySQL Command Line` and create an empty database by:
+1. `CREATE DATABASE tuti_prisma;`
+2. `USE tuti_prisma;`
 
 On the root folder, create a file named `.env.development` and paste the following code 
 
-`DATABASE_URL="postgresql://USERNAME:PASSWORD@localhost:5432/tuti-prisma?schema=public"`
+`DATABASE_URL="mysql://root:PASSWORD@localhost:3306/tuti_prisma"`
 
-replace `USERNAME` AND `PASSWORD` with the ones you have created when installing postgres
+replace `USERNAME` AND `PASSWORD` with the ones you have created when installing mySQL
 
 ## Setting up playwright E2E tests
 1. Create a `playwright.auth.json` file on the root folder. This file will contain all the credentials needed to run the tests
