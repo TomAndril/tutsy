@@ -5,11 +5,9 @@ function getEnv() {
 function getHost() {
   const env = getEnv();
 
-  console.log(env);
-
   if (env === "development") {
     return "http://localhost:3000";
-  } else if (env === "test") {
+  } else {
     return "https://tuti-test.vercel.app/";
   }
 }
