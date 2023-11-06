@@ -2,32 +2,37 @@ import { db } from "@/lib/db";
 import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 
-export async function GET() {
-  try {
-    const session = await getServerSession();
-  
-    const userVideos = await db.video.findMany({
-      where: {
-        userId: session?.user.id,
-      },
+export function GET() {
+  return getServerSession()
+    .then((session) => {
+      return db.video.findMany({
+        where: {
+          userId: session?.user.id,
+        },
+      });
+    })
+    .then((userVideos) => {
+      return Promise.all(
+        userVideos.map((video) => {
+          return db.chapter
+            .findMany({
+              where: {
+                videoId: video.id,
+              },
+            })
+            .then((chapters) => {
+              return {
+                ...video,
+                chapters,
+              };
+            });
+        })
+      );
+    })
+    .then((userVideosWithChapters) => {
+      return NextResponse.json({ videos: userVideosWithChapters });
+    })
+    .catch(() => {
+      return NextResponse.error();
     });
-  
-    const userVideosWithChapters = await Promise.all(
-      userVideos.map(async (video) => {
-        const chapters = await db.chapter.findMany({
-          where: {
-            videoId: video.id,
-          },
-        });
-        return {
-          ...video,
-          chapters,
-        };
-      })
-    );
-  
-    return NextResponse.json({ videos: userVideosWithChapters });
-  } catch (error) {
-    return NextResponse.error();
-  }
 }
