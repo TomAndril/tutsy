@@ -8,7 +8,7 @@ function getHost() {
   if (env === "development") {
     return "http://localhost:3000";
   } else {
-    return "https://api.example.com";
+    return "https://tuti-test.vercel.app/";
   }
 }
 
