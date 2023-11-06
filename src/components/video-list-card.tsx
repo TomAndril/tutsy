@@ -52,7 +52,7 @@ export default function VideoListCard({ video }: Props) {
   const queryClient = useQueryClient();
 
   return (
-    <div className="relative group">
+    <div className="relative group" data-testid={`video-card-${video.id}`}>
       <div
         className={`absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-all ${
           isDropdownOpen ? "opacity-100" : "opacity-0"
@@ -60,7 +60,12 @@ export default function VideoListCard({ video }: Props) {
       >
         <DropdownMenu onOpenChange={() => setIsDropdownOpen((prev) => !prev)}>
           <DropdownMenuTrigger asChild>
-            <Button variant="outline" className="ml-2" size="icon">
+            <Button
+              variant="outline"
+              className="ml-2"
+              size="icon"
+              data-testid={`video-card-actions-button-${video.id}`}
+            >
               <Icons.more size={14} />
             </Button>
           </DropdownMenuTrigger>
@@ -158,6 +163,7 @@ export default function VideoListCard({ video }: Props) {
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogAction
+              data-testid='confirm-delete-video'
               className="text-destructive"
               onClick={async (e) => {
                 e.preventDefault();

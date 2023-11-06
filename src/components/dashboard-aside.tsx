@@ -11,7 +11,7 @@ import { Icons } from "@/components/icons";
 export default function DashboardAside() {
   const path = usePathname();
   return (
-    <aside className="max-w-md">
+    <aside className="max-w-md" data-testid='dashboard-aside'>
       {dashboardNavItems.map((item) => {
         const Icon = Icons[item.icon];
         return (

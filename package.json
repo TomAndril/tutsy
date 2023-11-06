@@ -7,7 +7,8 @@
     "open-browser": "start http://localhost:3000",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test:e2e": "playwright test"
   },
   "dependencies": {
     "-": "^0.0.1",
@@ -54,6 +55,7 @@
     "zod": "^3.21.4"
   },
   "devDependencies": {
+    "@playwright/test": "^1.39.0",
     "@tanstack/react-query-devtools": "^5.4.3",
     "open-browser": "^3.6.0",
     "prisma": "^5.4.1"
