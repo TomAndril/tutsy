@@ -6,7 +6,7 @@ import GoogleProvider from "next-auth/providers/google";
 import GithubProvider from "next-auth/providers/github";
 
 export const authOptions: NextAuthOptions = {
-  adapter: PrismaAdapter(db),
+  adapter: PrismaAdapter(db) as NextAuthOptions["adapter"],
   callbacks: {
     session: async ({ session, token }) => {
       session.user.id = token.sub ?? "";
