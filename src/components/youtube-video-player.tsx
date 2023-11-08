@@ -100,7 +100,7 @@ export default function YoutubeVideoPlayer({ video }: Props) {
           width={"100%"}
           height={"100%"}
           controls
-          url={`https://vid.puffyan.us/latest_version?id=${video.id}`}
+          url={`https://yewtu.be/latest_version?id=${video.id}`}
           config={{
             file: {
               attributes: {
