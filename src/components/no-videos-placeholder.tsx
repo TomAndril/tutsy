@@ -4,7 +4,7 @@ import { Button } from "./ui/button";
 
 export default function NoVideosPlaceholder() {
   return (
-    <div className="border border-dashed flex items-center flex-col py-24 rounded">
+    <div className="border border-dashed flex items-center flex-col py-24 rounded mt-4">
       <div className="bg-slate-700 p-4 rounded-full flex items-center justify-center">
         <Icons.youtube size={48} />
       </div>
