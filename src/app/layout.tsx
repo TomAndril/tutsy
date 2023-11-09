@@ -1,4 +1,5 @@
 import "@/styles/globals.css";
+import { Analytics } from "@vercel/analytics/react";
 import type { Metadata } from "next";
 import { GeistSans, GeistMono } from "geist/font";
 
@@ -24,6 +25,7 @@ export default function RootLayout({
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             <ReactQueryWrapper>
               {children}
+              <Analytics />
               <Toaster />
             </ReactQueryWrapper>
           </ThemeProvider>
