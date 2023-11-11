@@ -93,17 +93,17 @@ export default function VideoListCard({ video }: Props) {
         </DropdownMenu>
       </div>
       <Link href={`/player/${video.id}`}>
-        <Card className="min-w-[225px] h-full">
+        <Card className="min-w-[225px] h-full rounded-md">
           <Image
             alt={video.title}
             src={video.thumbnail}
             width={360}
             height={240}
-            className=" rounded-t w-full"
+            className=" rounded-t-md w-full"
           />
           <CardHeader>
-            <CardTitle>{video.title}</CardTitle>
-            <CardDescription>{video.author}</CardDescription>
+            <CardTitle className="line-clamp-2">{video.title}</CardTitle>
+            <CardDescription className="line-clamp-1">{video.author}</CardDescription>
           </CardHeader>
           <CardContent>
             <VideoProgressBar chapters={video.chapters} />
