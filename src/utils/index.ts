@@ -11,12 +11,13 @@ const capitalize = (str: string) => {
 };
 
 const getVideoId = (url: string) => {
-  const videoId = url.split("v=")[1];
-  const ampersandPosition = videoId.indexOf("&");
-  if (ampersandPosition !== -1) {
-    return videoId.substring(0, ampersandPosition);
-  }
-  return videoId;
+  const urlParts = url.split(/(vi\/|v=|\/v\/|youtu\.be\/|\/embed\/)/);
+  const id =
+    urlParts[2] !== undefined
+      ? urlParts[2].split(/[^0-9a-z_\-]/i)[0]
+      : urlParts[0];
+
+  return id;
 };
 
 export const secondsToMinutes = (seconds: number) => {
@@ -44,6 +45,7 @@ export const calculatePercentage = (
   return (100 * partialValue) / totalValue;
 };
 
-export const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+export const wait = (ms: number) =>
+  new Promise((resolve) => setTimeout(resolve, ms));
 
 export { getFirstWord, getFirstLetter, capitalize, getVideoId };
