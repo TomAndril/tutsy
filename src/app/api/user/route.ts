@@ -2,7 +2,7 @@ import { db } from "@/lib/db";
 import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 
-export const dynamic = 'force-dynamic'
+export const dynamic = "force-dynamic";
 
 export async function GET() {
   try {
@@ -12,8 +12,11 @@ export async function GET() {
       where: {
         userId: session?.user.id,
       },
+      orderBy: {
+        createdAt: "asc",
+      },
     });
-  
+
     const userVideosWithChapters = await Promise.all(
       userVideos.map(async (video) => {
         const chapters = await db.chapter.findMany({
