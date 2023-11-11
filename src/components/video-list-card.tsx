@@ -51,6 +51,9 @@ export default function VideoListCard({ video }: Props) {
 
   const queryClient = useQueryClient();
 
+  const hasChapters = video.chapters.length > 0;
+  const canBeReset = video.chapters.some((c) => c.completed);
+
   return (
     <div className="relative group" data-testid={`video-card-${video.id}`}>
       <div
@@ -70,16 +73,21 @@ export default function VideoListCard({ video }: Props) {
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            <DropdownMenuItem
-              className="cursor-pointer"
-              onSelect={() => {
-                setShowResetProgressDialog(true);
-                setSelectedVideoId(video.id);
-              }}
-            >
-              Reset progress
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
+            {hasChapters && (
+              <>
+                <DropdownMenuItem
+                  disabled={!canBeReset}
+                  className="cursor-pointer"
+                  onSelect={() => {
+                    setShowResetProgressDialog(true);
+                    setSelectedVideoId(video.id);
+                  }}
+                >
+                  Reset progress
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+              </>
+            )}
             <DropdownMenuItem
               onSelect={() => {
                 setShowDeleteDialog(true);
@@ -103,7 +111,9 @@ export default function VideoListCard({ video }: Props) {
           />
           <CardHeader>
             <CardTitle className="line-clamp-2">{video.title}</CardTitle>
-            <CardDescription className="line-clamp-1">{video.author}</CardDescription>
+            <CardDescription className="line-clamp-1">
+              {video.author}
+            </CardDescription>
           </CardHeader>
           <CardContent>
             <VideoProgressBar chapters={video.chapters} />
@@ -163,7 +173,7 @@ export default function VideoListCard({ video }: Props) {
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogAction
-              data-testid='confirm-delete-video'
+              data-testid="confirm-delete-video"
               className="text-destructive"
               onClick={async (e) => {
                 e.preventDefault();
