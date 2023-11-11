@@ -76,6 +76,7 @@ model Video {
   duration   Int
   thumbnail  String    @default("")
   author     String
+  createdAt  DateTime?  @default(now())
 
   @@index([userId])
 }
