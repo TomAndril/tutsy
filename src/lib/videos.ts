@@ -42,3 +42,12 @@ export async function updateChapterStatus(chapter: Chapter) {
     chapterId: chapter.id,
   });
 }
+
+export async function getVideoSearchResults(query: string) {
+  const { data } = await axios.get(getHost() + "/api/search", {
+    params: {
+      query,
+    },
+  });
+  return data as any;
+}
