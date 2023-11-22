@@ -1,6 +1,6 @@
 import axios from "axios";
 import { getHost } from "./env";
-import { VideoWithChapters } from "@/types/video";
+import { VideoSearchResult, VideoWithChapters } from "@/types/video";
 import { Chapter } from "@prisma/client";
 
 export async function addVideoToUserAccount(videoId: string) {
@@ -41,4 +41,13 @@ export async function updateChapterStatus(chapter: Chapter) {
   await axios.patch(getHost() + "/api/progress", {
     chapterId: chapter.id,
   });
+}
+
+export async function getVideoSearchResults(query: string) {
+  const { data } = await axios.get(getHost() + "/api/search", {
+    params: {
+      query,
+    },
+  });
+  return data.data as VideoSearchResult[];
 }
