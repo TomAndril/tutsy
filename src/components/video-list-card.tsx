@@ -110,7 +110,7 @@ export default function VideoListCard({ video }: Props) {
             className=" rounded-t-md w-full"
           />
           <CardHeader>
-            <CardTitle className="line-clamp-2">{video.title}</CardTitle>
+            <CardTitle className="line-clamp-1">{video.title}</CardTitle>
             <CardDescription className="line-clamp-1">
               {video.author}
             </CardDescription>
