@@ -3,6 +3,8 @@ import ytsr from "ytsr";
 import ytdl from "ytdl-core";
 import { VideoSearchResult } from "@/types/video";
 
+export const dynamic = 'force-dynamic'
+
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
 
