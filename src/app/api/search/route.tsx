@@ -9,13 +9,26 @@ export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
 
   const query = searchParams.get("query");
-  const searchResults = await ytsr.getFilters(query as string);
+  let searchResults;
+  try {
+    searchResults = await ytsr.getFilters(query as string);
+  } catch (error) {
+    console.error(error);
+    return NextResponse.error();
+  }
+
   const filter = searchResults.get("Type")?.get("Video");
 
-  const result = await ytsr(filter?.url as string, {
-    safeSearch: true,
-    limit: 20,
-  });
+  let result;
+  try {
+    result = await ytsr(filter?.url as string, {
+      safeSearch: true,
+      limit: 20,
+    });
+  } catch (error) {
+    console.error(error);
+    return NextResponse.error();
+  }
 
   // get the video ids
   const ids = result.items
@@ -29,9 +42,15 @@ export async function GET(req: NextRequest) {
     .filter((id) => id !== undefined);
 
   // get the videos with chapters
-  const videosRequests = await Promise.all(
-    ids.map((id) => ytdl.getInfo(id as string))
-  );
+  let videosRequests;
+  try {
+    videosRequests = await Promise.all(
+      ids.map((id) => ytdl.getInfo(id as string))
+    );
+  } catch (error) {
+    console.error(error);
+    return NextResponse.error();
+  }
 
   const parsedVideos = videosRequests
     .filter((result) => result.videoDetails.chapters.length > 0)
