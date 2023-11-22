@@ -2,7 +2,6 @@
 
 import useAddVideoToAccount from "@/hooks/use-add-video-to-account";
 import { Button } from "./ui/button";
-import { useRouter } from "next/navigation";
 import { Icons } from "./icons";
 
 interface Props {
@@ -12,15 +11,8 @@ interface Props {
 export default function AddVideoToAccount({ videoId }: Props) {
   const mutation = useAddVideoToAccount();
 
-  const router = useRouter();
-
   const handleAddVideoToAccount = () => {
-    mutation.mutate(videoId, {
-      onSuccess: () => {
-        router.refresh();
-        router.push("/dashboard");
-      },
-    });
+    mutation.mutate(videoId);
   };
 
   return (

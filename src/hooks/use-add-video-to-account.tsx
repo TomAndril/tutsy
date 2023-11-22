@@ -39,5 +39,9 @@ export default function useAddVideoToAccount() {
         description: "Please try again later",
       });
     },
+    onSuccess: () => {
+      router.refresh();
+      router.push("/dashboard");
+    }
   });
 }

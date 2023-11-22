@@ -25,9 +25,9 @@ export default async function Navbar({ borderBottom = false }: Props) {
           <Badge variant="secondary">BETA</Badge>
         </div>
         <div className="hidden md:flex w-3/6">
-          <Button asChild variant="link" className="font-mono mr-6">
+          {/* <Button asChild variant="link" className="font-mono mr-6">
             <Link href="/">Discover</Link>
-          </Button>
+          </Button> */}
           <NavBarSearch />
         </div>
         <NavBarRightSide />

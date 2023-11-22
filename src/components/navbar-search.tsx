@@ -3,17 +3,26 @@
 import { Icons } from "./icons";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 export default function NavBarSearch() {
   const [query, setQuery] = useState("");
 
   const router = useRouter();
+  const pathName = usePathname();
+  const searchQuery = useSearchParams().get("q");
 
   function onSubmit() {
+    setQuery("");
     router.push(`/search?q=${query}`);
   }
+
+  useEffect(() => {
+    return () => {
+      setQuery("");
+    };
+  }, [pathName]);
 
   return (
     <>

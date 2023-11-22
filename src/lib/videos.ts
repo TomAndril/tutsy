@@ -1,6 +1,6 @@
 import axios from "axios";
 import { getHost } from "./env";
-import { VideoWithChapters } from "@/types/video";
+import { VideoSearchResult, VideoWithChapters } from "@/types/video";
 import { Chapter } from "@prisma/client";
 
 export async function addVideoToUserAccount(videoId: string) {
@@ -49,5 +49,5 @@ export async function getVideoSearchResults(query: string) {
       query,
     },
   });
-  return data as any;
+  return data.data as VideoSearchResult[];
 }

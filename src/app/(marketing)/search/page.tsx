@@ -1,18 +1,14 @@
-"use client";
+import SearchContainer from "@/components/search-container";
+import { getVideoSearchResults } from "@/lib/videos";
 
-import useSearchVideos from "@/hooks/use-search-videos";
-import { useSearchParams } from "next/navigation";
+export default async function SearchPage({
+  searchParams,
+}: {
+  searchParams: { [key: string]: string | string[] | undefined };
+}) {
+  const query = searchParams?.q;
+  
+  const initialData = await getVideoSearchResults(query as string);
 
-export default function SearchPage() {
-  const searchParams = useSearchParams();
-
-  const query = searchParams.get("q");
-
-  const results = useSearchVideos(query as string);
-
-  return (
-    <div className="container my-4">
-      <h1 className="text-xl">Showing results for &quot;{query}&quot;</h1>
-    </div>
-  );
+  return <SearchContainer initialData={initialData} query={query as string} />;
 }

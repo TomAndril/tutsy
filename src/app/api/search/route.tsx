@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import ytsr from "ytsr";
 import ytdl from "ytdl-core";
+import { VideoSearchResult } from "@/types/video";
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
@@ -12,7 +13,6 @@ export async function GET(req: NextRequest) {
   const result = await ytsr(filter?.url as string, {
     safeSearch: true,
     limit: 20,
-    pages: 1,
   });
 
   // get the video ids
@@ -29,13 +29,27 @@ export async function GET(req: NextRequest) {
   // get the videos with chapters
   const videosRequests = await Promise.all(
     ids.map((id) => ytdl.getInfo(id as string))
-  ).then((results) =>
-    results
-      .filter((result) => result.videoDetails.chapters.length > 0)
-      .map((video) => video.videoDetails)
   );
 
+  const parsedVideos = videosRequests
+    .filter((result) => result.videoDetails.chapters.length > 0)
+    .map((video) => {
+      return {
+        author: video.videoDetails.author,
+        chapters: video.videoDetails.chapters,
+        description: video.videoDetails.description,
+        lengthSeconds: video.videoDetails.lengthSeconds,
+        thumbnails: video.videoDetails.thumbnails,
+        title: video.videoDetails.title,
+        videoId: video.videoDetails.videoId,
+        video_url: video.videoDetails.video_url,
+        viewCount: video.videoDetails.viewCount,
+        category: video.videoDetails.category,
+        publishDate: video.videoDetails.publishDate,
+      } as VideoSearchResult;
+    });
+
   return NextResponse.json({
-    data: videosRequests.length > 0 ? videosRequests : [],
+    data: parsedVideos,
   });
 }

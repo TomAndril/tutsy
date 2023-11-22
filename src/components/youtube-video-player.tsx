@@ -4,7 +4,6 @@ import { VideoWithChapters } from "@/types/video";
 import { cn } from "@/lib/utils";
 import { Separator } from "./ui/separator";
 import { Button } from "./ui/button";
-import { secondsToHoursAndMinutes, secondsToMinutes } from "@/utils";
 import { useCallback, useRef, useState } from "react";
 import { Skeleton } from "./ui/skeleton";
 import { ScrollArea } from "./ui/scroll-area";
@@ -77,7 +76,18 @@ export default function YoutubeVideoPlayer({ video }: Props) {
   );
 
   const hasChapters = video.chapters?.length > 0;
-  const hasLessThanOneHour = video.duration < 3600;
+
+  const calculateChapterDuration = (chapter: Chapter) => {
+    const nextChapter = video.chapters.find(
+      (c) => c.startTime > chapter.startTime
+    );
+
+    if (!nextChapter) {
+      return Math.round((video.duration - chapter.startTime) / 60);
+    }
+
+    return Math.round((nextChapter.startTime - chapter.startTime) / 60);
+  };
 
   return (
     <div
@@ -95,7 +105,10 @@ export default function YoutubeVideoPlayer({ video }: Props) {
           ref={playerRef}
           playing={isPlaying}
           onProgress={({ playedSeconds }) => handleUpdateChapter(playedSeconds)}
-          onReady={() => setIsVideoReady(true)}
+          onReady={() => {
+            setIsVideoReady(true);
+            setIsPlaying(true);
+          }}
           id={video.id}
           width={"100%"}
           height={"100%"}
@@ -138,9 +151,7 @@ export default function YoutubeVideoPlayer({ video }: Props) {
                   onClick={() => handleJumpToChapter(chapter.startTime)}
                 >
                   <span className="w-10 text-slate-400">
-                    {hasLessThanOneHour
-                      ? secondsToMinutes(chapter.startTime)
-                      : secondsToHoursAndMinutes(chapter.startTime)}
+                    {calculateChapterDuration(chapter)} min
                   </span>
                   <span className="text-left w-full lg:w-96 lg:truncate px-4">
                     {chapter.title}
