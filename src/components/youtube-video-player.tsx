@@ -150,7 +150,7 @@ export default function YoutubeVideoPlayer({ video }: Props) {
                   className="text-xs rounded-none w-full justify-start px-4 lg:px-8"
                   onClick={() => handleJumpToChapter(chapter.startTime)}
                 >
-                  <span className="w-10 text-slate-400">
+                  <span className="w-14 text-slate-400">
                     {calculateChapterDuration(chapter)} min
                   </span>
                   <span className="text-left w-full lg:w-96 lg:truncate px-4">
