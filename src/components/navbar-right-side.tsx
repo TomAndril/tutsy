@@ -20,7 +20,7 @@ export default async function NavBarRightSide() {
 
   if (session?.name && session?.image) {
     return (
-      <div className="flex items-center">
+      <div className="flex items-center ml-auto md:ml-0">
         <Button asChild variant="link" className="font-mono">
           <Link href="/dashboard">Dashboard</Link>
         </Button>
