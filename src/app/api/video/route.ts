@@ -6,7 +6,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { db } from "@/lib/db";
 
-export const dynamic = 'force-dynamic'
+export const dynamic = "force-dynamic";
 
 export async function GET(req: NextRequest) {
   try {
@@ -115,11 +115,18 @@ export async function DELETE(req: NextRequest) {
       );
     }
 
-    await db.video.delete({
-      where: {
-        id: videoId,
-      },
-    });
+    await db.$transaction([
+      db.chapter.deleteMany({
+        where: {
+          videoId,
+        },
+      }),
+      db.video.delete({
+        where: {
+          id: videoId,
+        },
+      }),
+    ]);
 
     return NextResponse.json(
       { message: "Video deleted" },
