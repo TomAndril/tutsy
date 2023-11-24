@@ -12,8 +12,8 @@ interface Props {
 
 export default function VideoPlayerContainer({ video }: Props) {
   const { data } = useQuery({
-    queryKey: [QueryKeys.VIDEO, video.id],
-    queryFn: () => getUserVideoById(video.id),
+    queryKey: [QueryKeys.VIDEO, video.youtubeId],
+    queryFn: () => getUserVideoById(video.youtubeId),
     initialData: video,
   });
 

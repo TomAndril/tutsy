@@ -11,7 +11,7 @@ export default function useUpdateChapterStatus(video: VideoWithChapters) {
     mutationFn: (chapter: Chapter) => updateChapterStatus(chapter),
     onSettled: async () => {
       return await queryClient.invalidateQueries({
-        queryKey: [QueryKeys.VIDEO, video.id],
+        queryKey: [QueryKeys.VIDEO, video.youtubeId],
       });
     },
   });

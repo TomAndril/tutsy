@@ -58,6 +58,7 @@ export async function POST(req: NextRequest) {
 
     await db.video.create({
       data: {
+        youtubeId: videoDetails.videoId,
         userId: session?.user.id,
         title: videoDetails.title,
         youtubeURL: videoDetails.video_url,
