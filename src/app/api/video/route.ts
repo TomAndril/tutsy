@@ -58,7 +58,6 @@ export async function POST(req: NextRequest) {
 
     await db.video.create({
       data: {
-        id: videoId,
         userId: session?.user.id,
         title: videoDetails.title,
         youtubeURL: videoDetails.video_url,
@@ -123,6 +122,7 @@ export async function DELETE(req: NextRequest) {
       }),
       db.video.delete({
         where: {
+          userId: session?.user.id,
           id: videoId,
         },
       }),
