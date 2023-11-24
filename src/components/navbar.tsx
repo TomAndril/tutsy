@@ -6,11 +6,13 @@ import { Button } from "./ui/button";
 
 import NavBarSearch from "./navbar-search";
 
+import MobileNav from "./mobile-nav";
+
 interface Props {
   borderBottom?: boolean;
 }
 
-export default async function Navbar({ borderBottom = false }: Props) {
+export default function Navbar({ borderBottom = false }: Props) {
   return (
     <div
       className={`sticky top-0 backdrop-blur-sm z-50 rounded ${
@@ -18,18 +20,19 @@ export default async function Navbar({ borderBottom = false }: Props) {
       }`}
     >
       <nav className="container flex items-center justify-between h-16 text-sm">
-        <div className="-ml-4 flex items-center justify-center">
+        <div className="flex items-center justify-center md:hidden">
+          <MobileNav />
+        </div>
+        <div className="-ml-4 hidden md:flex items-center justify-center">
           <Button asChild variant="link" className="font-mono">
             <Link href="/">Tuti</Link>
           </Button>
           <Badge variant="secondary">BETA</Badge>
         </div>
         <div className="hidden md:flex w-3/6">
-          {/* <Button asChild variant="link" className="font-mono mr-6">
-            <Link href="/">Discover</Link>
-          </Button> */}
           <NavBarSearch />
         </div>
+
         <NavBarRightSide />
       </nav>
     </div>
