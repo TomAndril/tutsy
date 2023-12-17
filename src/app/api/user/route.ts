@@ -1,3 +1,4 @@
+import { authOptions } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
@@ -6,7 +7,7 @@ export const dynamic = "force-dynamic";
 
 export async function GET() {
   try {
-    const session = await getServerSession();
+    const session = await getServerSession(authOptions);
   
     const userVideos = await db.video.findMany({
       where: {
