@@ -91,7 +91,7 @@ export default function YoutubeVideoPlayer({ video, userConfig }: Props) {
       if (hasLastViewedChapter) {
         const lastViewedChapter = video.chapters
           .filter((c) => c.completedAt)
-          .toSorted((a, b) => {
+          .sort((a, b) => {
             if (a.completedAt && b.completedAt) {
               return a.completedAt < b.completedAt ? 1 : -1;
             }
