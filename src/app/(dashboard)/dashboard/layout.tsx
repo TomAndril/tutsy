@@ -8,27 +8,17 @@ interface DashboardLayoutProps {
   children: React.ReactNode;
 }
 
-async function getUserSession() {
-  const session = await getCurrentUser();
-
-  if (session) {
-    return session;
-  }
-
-  return null;
-}
-
 export default async function DashboardLayout({
   children,
 }: DashboardLayoutProps) {
-  const session = await getUserSession();
+  const session = await getCurrentUser();
 
   if (!session) {
     return redirect("api/auth/signin");
   }
 
   return (
-    <>
+    <main className="bg-main-gradient">
       <Navbar borderBottom />
       <div className="container">
         <div className="grid flex-1 md:grid-cols-[200px_1fr] mt-8 gap-12">
@@ -36,6 +26,6 @@ export default async function DashboardLayout({
           {children}
         </div>
       </div>
-    </>
+    </main>
   );
 }
