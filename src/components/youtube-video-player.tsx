@@ -15,13 +15,18 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "./ui/tooltip";
-import { Chapter } from "@prisma/client";
-
+import { Chapter, Config } from "@prisma/client";
+import { toast } from "./ui/use-toast";
+import { ToastAction } from "./ui/toast";
 interface Props {
   video: VideoWithChapters;
+  userConfig: Config;
 }
 
-export default function YoutubeVideoPlayer({ video }: Props) {
+// TODO: Cleanup this file as it's a mess. Maybe split it into multiple
+// components or extract some logic into hooks
+
+export default function YoutubeVideoPlayer({ video, userConfig }: Props) {
   const [isVideoReady, setIsVideoReady] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentChapterTitle, setCurrentChapterTitle] = useState<
@@ -32,10 +37,10 @@ export default function YoutubeVideoPlayer({ video }: Props) {
 
   const playerRef = useRef<ReactPlayer>(null);
 
-  const handleJumpToChapter = (ms: number) => {
+  const handleJumpToChapter = useCallback((ms: number) => {
     playerRef.current?.seekTo(ms);
     setIsPlaying(true);
-  };
+  }, []);
 
   const handleUpdateChapter = useCallback(
     (playedSeconds: number) => {
@@ -75,6 +80,53 @@ export default function YoutubeVideoPlayer({ video }: Props) {
     [video.chapters, video.duration, isPending, mutate]
   );
 
+  const handleOnReady = () => {
+    if (isVideoReady) {
+      return;
+    }
+
+    if (userConfig === null || userConfig.jumpToLastChapter) {
+      const hasLastViewedChapter = video.chapters.some((c) => c.completedAt);
+
+      if (hasLastViewedChapter) {
+        const lastViewedChapter = video.chapters
+          .filter((c) => c.completedAt)
+          .toSorted((a, b) => {
+            if (a.completedAt && b.completedAt) {
+              return a.completedAt < b.completedAt ? 1 : -1;
+            }
+            return 0;
+          });
+
+        handleJumpToChapter(lastViewedChapter[0].startTime);
+        setIsVideoReady(true);
+
+        if (localStorage.getItem("jumpToLastChapterToast") !== "false") {
+          toast({
+            title: "Jumping to last viewed chapter",
+            variant: "default",
+            description: "You can disable this behavior in settings",
+            action: (
+              <ToastAction
+                onClick={() =>
+                  localStorage.setItem("jumpToLastChapterToast", "false")
+                }
+                className="text-xs"
+                altText="Don't show this again"
+              >
+                Don&apos;t show <br /> this again
+              </ToastAction>
+            ),
+          });
+        }
+
+        return;
+      }
+    }
+    setIsVideoReady(true);
+    setIsPlaying(true);
+  };
+
   const hasChapters = video.chapters?.length > 0;
 
   const calculateChapterDuration = (chapter: Chapter) => {
@@ -83,10 +135,18 @@ export default function YoutubeVideoPlayer({ video }: Props) {
     );
 
     if (!nextChapter) {
-      return Math.round((video.duration - chapter.startTime) / 60);
+      return `${Math.round((video.duration - chapter.startTime) / 60)} min`;
     }
 
-    return Math.round((nextChapter.startTime - chapter.startTime) / 60);
+    const chapterDuration = Math.round(
+      (nextChapter.startTime - chapter.startTime) / 60
+    );
+
+    if (chapterDuration < 1) {
+      return `< 1 min`;
+    }
+
+    return `${chapterDuration} min`;
   };
 
   return (
@@ -105,10 +165,7 @@ export default function YoutubeVideoPlayer({ video }: Props) {
           ref={playerRef}
           playing={isPlaying}
           onProgress={({ playedSeconds }) => handleUpdateChapter(playedSeconds)}
-          onReady={() => {
-            setIsVideoReady(true);
-            setIsPlaying(true);
-          }}
+          onReady={handleOnReady}
           id={video.id}
           width={"100%"}
           height={"100%"}
@@ -151,7 +208,7 @@ export default function YoutubeVideoPlayer({ video }: Props) {
                   onClick={() => handleJumpToChapter(chapter.startTime)}
                 >
                   <span className="w-14 text-slate-400">
-                    {calculateChapterDuration(chapter)} min
+                    {calculateChapterDuration(chapter)}
                   </span>
                   <span className="text-left w-full lg:w-96 lg:truncate px-4">
                     {chapter.title}
