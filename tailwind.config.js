@@ -74,6 +74,12 @@ module.exports = {
         sans: ["var(--font-geist-sans)"],
         mono: ["var(--font-geist-mono)"],
       },
+      backgroundImage: {
+        "main-gradient":
+          "radial-gradient(ellipse 80% 50% at 50% -20%,rgba(120,119,198,0.3), transparent)",
+        // extends the default theme
+        
+      },
     },
   },
   plugins: [require("tailwindcss-animate")],

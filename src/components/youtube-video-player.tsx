@@ -113,7 +113,7 @@ export default function YoutubeVideoPlayer({ video }: Props) {
           width={"100%"}
           height={"100%"}
           controls
-          url={`https://yewtu.be/latest_version?id=${video.youtubeId}`}
+          url={`https://invidious.fdn.fr/latest_version?id=${video.youtubeId}`}
           config={{
             file: {
               attributes: {

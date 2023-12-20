@@ -6,9 +6,9 @@ interface Props {
 
 export default function MarketingLayout({ children }: Props) {
   return (
-    <>
+    <div className="bg-main-gradient">
       <Navbar borderBottom />
       {children}
-    </>
+    </div>
   );
 }
