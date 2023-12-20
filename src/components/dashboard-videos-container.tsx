@@ -14,7 +14,7 @@ interface Props {
 export default function DashboardVideosContainer({ videos }: Props) {
   const { data } = useQuery({
     queryKey: [QueryKeys.ALL_VIDEOS],
-    queryFn: getUserVideos,
+    queryFn: () => getUserVideos(),
     initialData: { videos },
   });
 

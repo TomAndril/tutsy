@@ -10,7 +10,7 @@ export async function addVideoToUserAccount(videoId: string) {
   });
 }
 
-export async function getUserVideos(cookies: ReadonlyRequestCookies) {
+export async function getUserVideos(cookies?: ReadonlyRequestCookies) {
   const { data } = await axios.get(getHost() + "/api/user", {
     headers: {
       // required for next-auth to work
