@@ -2,6 +2,7 @@ import axios from "axios";
 import { getHost } from "./env";
 import { VideoSearchResult, VideoWithChapters } from "@/types/video";
 import { Chapter } from "@prisma/client";
+import { ReadonlyRequestCookies } from "next/dist/server/web/spec-extension/adapters/request-cookies";
 
 export async function addVideoToUserAccount(videoId: string) {
   await axios.post(getHost() + "/api/video", {
@@ -9,8 +10,13 @@ export async function addVideoToUserAccount(videoId: string) {
   });
 }
 
-export async function getUserVideos() {
-  const { data } = await axios.get(getHost() + "/api/user");
+export async function getUserVideos(cookies: ReadonlyRequestCookies) {
+  const { data } = await axios.get(getHost() + "/api/user", {
+    headers: {
+      // required for next-auth to work
+      cookie: cookies as any,
+    },
+  });
   return data as { videos: VideoWithChapters[] };
 }
 
