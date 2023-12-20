@@ -47,6 +47,7 @@ export async function PATCH(req: NextRequest) {
       },
       data: {
         completed: true,
+        completedAt: new Date(),
       },
     });
 
@@ -66,6 +67,7 @@ export async function PUT(req: NextRequest) {
       },
       data: {
         completed: false,
+        completedAt: null,
       },
     });
 

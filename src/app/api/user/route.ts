@@ -8,13 +8,13 @@ export const dynamic = "force-dynamic";
 export async function GET() {
   try {
     const session = await getServerSession(authOptions);
-  
+
     const userVideos = await db.video.findMany({
       where: {
         userId: session?.user.id,
       },
       orderBy: {
-        createdAt: "asc",
+        createdAt: "desc",
       },
     });
 
@@ -31,8 +31,10 @@ export async function GET() {
         };
       })
     );
-  
-    return NextResponse.json({ videos: userVideosWithChapters });
+
+    return NextResponse.json({
+      videos: userVideosWithChapters,
+    });
   } catch (error) {
     return NextResponse.error();
   }
