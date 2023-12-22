@@ -135,7 +135,15 @@ export default function YoutubeVideoPlayer({ video, userConfig }: Props) {
     );
 
     if (!nextChapter) {
-      return `${Math.round((video.duration - chapter.startTime) / 60)} min`;
+      const finalChapterDuration = Math.round(
+        (video.duration - chapter.startTime) / 60
+      );
+
+      if (finalChapterDuration < 1) {
+        return `< 1 min`;
+      }
+
+      return `${finalChapterDuration} min`;
     }
 
     const chapterDuration = Math.round(
