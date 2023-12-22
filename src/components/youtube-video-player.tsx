@@ -29,9 +29,7 @@ interface Props {
 export default function YoutubeVideoPlayer({ video, userConfig }: Props) {
   const [isVideoReady, setIsVideoReady] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [currentChapterTitle, setCurrentChapterTitle] = useState<
-    Chapter["title"] | null
-  >();
+  const [currentChapter, setCurrentChapter] = useState<Chapter>();
 
   const { mutate, isPending, variables } = useUpdateChapterStatus(video);
 
@@ -50,10 +48,10 @@ export default function YoutubeVideoPlayer({ video, userConfig }: Props) {
       const isFinalChapter =
         playedSeconds >= video.chapters[video.chapters.length - 1].startTime;
 
-      setCurrentChapterTitle(
+      setCurrentChapter(
         video.chapters[
           isFinalChapter ? video.chapters.length - 1 : currentChapterIndex
-        ]?.title
+        ]
       );
 
       // If the video is almost finished, mark the last chapter as completed
@@ -164,9 +162,9 @@ export default function YoutubeVideoPlayer({ video, userConfig }: Props) {
       })}
     >
       <div className="max-h-[80vh] border-r relative group">
-        {hasChapters && !!currentChapterTitle && (
+        {hasChapters && !!currentChapter && (
           <div className="absolute left-8 top-4 text-sm opacity-0 group-hover:opacity-100 transition-all px-4 rounded backdrop-blur shadow py-2 border">
-            {currentChapterTitle}
+            {currentChapter.title}
           </div>
         )}
         <ReactPlayer
@@ -218,9 +216,13 @@ export default function YoutubeVideoPlayer({ video, userConfig }: Props) {
                   <span className="w-14 text-slate-400">
                     {calculateChapterDuration(chapter)}
                   </span>
-                  <span className="text-left w-full lg:w-96 lg:truncate px-4">
+                  <h3 className="text-left w-full lg:w-96 lg:truncate px-4 flex items-center">
                     {chapter.title}
-                  </span>
+                    {currentChapter?.id === chapter.id && (
+                      <Icons.play size={14} className="ml-2" />
+                    )}
+                  </h3>
+
                   {isPending && variables?.id === chapter.id && (
                     <Icons.check
                       size={18}

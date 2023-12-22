@@ -60,7 +60,7 @@ export default function PlayerConfigForm({ config }: Props) {
                   />
                 </FormControl>
                 <FormLabel>
-                  Jump to the last viewed chapter when the player starts
+                  Jump to the last completed chapter when the video starts
                 </FormLabel>
                 {mutator.isPending && (
                   <Icons.loader className="animate-spin ml-2" size={16} />
