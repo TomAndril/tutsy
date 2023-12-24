@@ -12,14 +12,7 @@ import {
   TooltipTrigger,
 } from "./ui/tooltip";
 import useMediaQuery from "@/hooks/use-media-query";
-import {
-  Drawer,
-  DrawerClose,
-  DrawerContent,
-  DrawerHeader,
-  DrawerTrigger,
-} from "./ui/drawer";
-import { useState } from "react";
+import { Drawer, DrawerClose, DrawerContent, DrawerTrigger } from "./ui/drawer";
 
 export default function ChapterSelector({
   video,
@@ -63,8 +56,6 @@ export default function ChapterSelector({
 
     return `${chapterDuration} min`;
   };
-
-  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   const hasChapters = video.chapters?.length > 0;
 
@@ -161,7 +152,6 @@ export default function ChapterSelector({
                       className="text-xs rounded-none w-full justify-start px-4 lg:px-8"
                       onClick={() => {
                         handleJumpToChapter(chapter.startTime);
-                        setIsDrawerOpen(false);
                       }}
                     >
                       <span className="w-14 text-slate-400">
