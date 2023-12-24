@@ -11,7 +11,8 @@ import {
   Loader2,
   Check,
   Info,
-  Menu
+  Menu,
+  ArrowUpNarrowWide
 } from "lucide-react";
 
 export const Icons = {
@@ -28,6 +29,7 @@ export const Icons = {
   check: Check,
   info: Info,
   menu: Menu,
+  arrowUp: ArrowUpNarrowWide
 };
 
 export type IconName = keyof typeof Icons;

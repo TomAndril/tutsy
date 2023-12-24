@@ -2,22 +2,12 @@ import "../styles/player.css";
 import ReactPlayer from "react-player";
 import { VideoWithChapters } from "@/types/video";
 import { cn } from "@/lib/utils";
-import { Separator } from "./ui/separator";
-import { Button } from "./ui/button";
 import { useCallback, useRef, useState } from "react";
-import { Skeleton } from "./ui/skeleton";
-import { ScrollArea } from "./ui/scroll-area";
-import { Icons } from "./icons";
 import useUpdateChapterStatus from "@/hooks/use-update-chapter-status";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "./ui/tooltip";
 import { Chapter, Config } from "@prisma/client";
 import { toast } from "./ui/use-toast";
 import { ToastAction } from "./ui/toast";
+import ChapterSelector from "./chapter-selector";
 interface Props {
   video: VideoWithChapters;
   userConfig: Config;
@@ -127,34 +117,6 @@ export default function YoutubeVideoPlayer({ video, userConfig }: Props) {
 
   const hasChapters = video.chapters?.length > 0;
 
-  const calculateChapterDuration = (chapter: Chapter) => {
-    const nextChapter = video.chapters.find(
-      (c) => c.startTime > chapter.startTime
-    );
-
-    if (!nextChapter) {
-      const finalChapterDuration = Math.round(
-        (video.duration - chapter.startTime) / 60
-      );
-
-      if (finalChapterDuration < 1) {
-        return `< 1 min`;
-      }
-
-      return `${finalChapterDuration} min`;
-    }
-
-    const chapterDuration = Math.round(
-      (nextChapter.startTime - chapter.startTime) / 60
-    );
-
-    if (chapterDuration < 1) {
-      return `< 1 min`;
-    }
-
-    return `${chapterDuration} min`;
-  };
-
   return (
     <div
       className={cn("grid grid-cols-1 border-t border-b", {
@@ -186,69 +148,14 @@ export default function YoutubeVideoPlayer({ video, userConfig }: Props) {
           }}
         />
       </div>
-      {hasChapters && !isVideoReady && (
-        <ScrollArea>
-          <div className="max-h-[80vh]">
-            <Skeleton className="h-[52px] my-1 mx-2" />
-            <Separator />
-            {video.chapters.map((chapter) => (
-              <div key={chapter.id}>
-                <Skeleton className="h-[44px] mx-6 my-1" />
-                <Separator />
-              </div>
-            ))}
-          </div>
-        </ScrollArea>
-      )}
-      {hasChapters && isVideoReady && (
-        <ScrollArea>
-          <div className="max-h-[80vh]">
-            <h2 className="text-sm p-2 lg:p-4 font-semibold">Chapters</h2>
-            <Separator className="" />
-            {video.chapters.map((chapter) => (
-              <div key={chapter.id}>
-                <Button
-                  variant="ghost"
-                  size="lg"
-                  className="text-xs rounded-none w-full justify-start px-4 lg:px-8"
-                  onClick={() => handleJumpToChapter(chapter.startTime)}
-                >
-                  <span className="w-14 text-slate-400">
-                    {calculateChapterDuration(chapter)}
-                  </span>
-                  <h3 className="text-left w-full lg:w-96 lg:truncate px-4 flex items-center">
-                    {chapter.title}
-                    {currentChapter?.id === chapter.id && (
-                      <Icons.play size={14} className="ml-2" />
-                    )}
-                  </h3>
-
-                  {isPending && variables?.id === chapter.id && (
-                    <Icons.check
-                      size={18}
-                      className="text-slate-600 dark:text-slate-400"
-                    />
-                  )}
-                  {chapter.completed && (
-                    <TooltipProvider>
-                      <Tooltip>
-                        <TooltipTrigger asChild>
-                          <Icons.check
-                            size={18}
-                            className="text-green-600 dark:text-green-400"
-                          />
-                        </TooltipTrigger>
-                        <TooltipContent>Chapter completed</TooltipContent>
-                      </Tooltip>
-                    </TooltipProvider>
-                  )}
-                </Button>
-                <Separator />
-              </div>
-            ))}
-          </div>
-        </ScrollArea>
-      )}
+      <ChapterSelector
+        video={video}
+        variables={variables}
+        currentChapter={currentChapter}
+        handleJumpToChapter={handleJumpToChapter}
+        isPending={isPending}
+        isVideoReady={isVideoReady}
+      />
     </div>
   );
 }
