@@ -12,7 +12,14 @@ import {
   TooltipTrigger,
 } from "./ui/tooltip";
 import useMediaQuery from "@/hooks/use-media-query";
-import { Drawer, DrawerClose, DrawerContent, DrawerTrigger } from "./ui/drawer";
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerTrigger,
+  DrawerOverlay,
+  DrawerPortal,
+} from "./ui/drawer";
 
 export default function ChapterSelector({
   video,
@@ -140,57 +147,60 @@ export default function ChapterSelector({
             <Icons.arrowUp className="ml-2" size={16} />
           </Button>
         </DrawerTrigger>
-        <DrawerContent>
-          {hasChapters && isVideoReady && (
-            <ScrollArea className="py-2">
-              {video.chapters.map((chapter) => (
-                <div key={chapter.id}>
-                  <DrawerClose className="w-full">
-                    <Button
-                      variant="ghost"
-                      size="lg"
-                      className="text-xs rounded-none w-full justify-start px-4 lg:px-8"
-                      onClick={() => {
-                        handleJumpToChapter(chapter.startTime);
-                      }}
-                    >
-                      <span className="w-14 text-slate-400">
-                        {calculateChapterDuration(chapter)}
-                      </span>
-                      <h3 className="text-left w-full lg:w-96 lg:truncate px-4 flex items-center">
-                        {chapter.title}
-                        {currentChapter?.id === chapter.id && (
-                          <Icons.play size={14} className="ml-2" />
-                        )}
-                      </h3>
+        <DrawerPortal>
+          <DrawerOverlay className="fixed inset-0 bg-black/40" />
+          <DrawerContent className="bg-white flex flex-col fixed bottom-0 left-0 right-0 max-h-[96%] rounded-t-[10px]">
+            {hasChapters && isVideoReady && (
+              <ScrollArea className="w-full mx-auto flex flex-col overflow-auto p-4 rounded-t-[10px]">
+                {video.chapters.map((chapter) => (
+                  <div key={chapter.id}>
+                    <DrawerClose className="w-full">
+                      <Button
+                        variant="ghost"
+                        size="lg"
+                        className="text-xs rounded-none w-full justify-start px-4 lg:px-8"
+                        onClick={() => {
+                          handleJumpToChapter(chapter.startTime);
+                        }}
+                      >
+                        <span className="w-14 text-slate-400">
+                          {calculateChapterDuration(chapter)}
+                        </span>
+                        <h3 className="text-left w-full lg:w-96 lg:truncate px-4 flex items-center">
+                          {chapter.title}
+                          {currentChapter?.id === chapter.id && (
+                            <Icons.play size={14} className="ml-2" />
+                          )}
+                        </h3>
 
-                      {isPending && variables?.id === chapter.id && (
-                        <Icons.check
-                          size={18}
-                          className="text-slate-600 dark:text-slate-400"
-                        />
-                      )}
-                      {chapter.completed && (
-                        <TooltipProvider>
-                          <Tooltip>
-                            <TooltipTrigger asChild>
-                              <Icons.check
-                                size={18}
-                                className="text-green-600 dark:text-green-400"
-                              />
-                            </TooltipTrigger>
-                            <TooltipContent>Chapter completed</TooltipContent>
-                          </Tooltip>
-                        </TooltipProvider>
-                      )}
-                    </Button>
-                  </DrawerClose>
-                  <Separator />
-                </div>
-              ))}
-            </ScrollArea>
-          )}
-        </DrawerContent>
+                        {isPending && variables?.id === chapter.id && (
+                          <Icons.check
+                            size={18}
+                            className="text-slate-600 dark:text-slate-400"
+                          />
+                        )}
+                        {chapter.completed && (
+                          <TooltipProvider>
+                            <Tooltip>
+                              <TooltipTrigger asChild>
+                                <Icons.check
+                                  size={18}
+                                  className="text-green-600 dark:text-green-400"
+                                />
+                              </TooltipTrigger>
+                              <TooltipContent>Chapter completed</TooltipContent>
+                            </Tooltip>
+                          </TooltipProvider>
+                        )}
+                      </Button>
+                    </DrawerClose>
+                    <Separator />
+                  </div>
+                ))}
+              </ScrollArea>
+            )}
+          </DrawerContent>
+        </DrawerPortal>
       </Drawer>
     </div>
   );

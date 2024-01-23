@@ -44,7 +44,6 @@ export default function VideoListCard({ video }: Props) {
   const [showResetProgressDialog, setShowResetProgressDialog] = useState(false);
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
   const [selectedVideoId, setSelectedVideoId] = useState<string | null>(null);
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const deleteVideoMutation = useDeleteVideoFromAccount();
   const resetProgressMutation = useResetVideoProgress();
@@ -55,13 +54,9 @@ export default function VideoListCard({ video }: Props) {
   const canBeReset = video.chapters.some((c) => c.completed);
 
   return (
-    <div className="relative group" data-testid={`video-card-${video.id}`}>
-      <div
-        className={`absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-all ${
-          isDropdownOpen ? "opacity-100" : "opacity-0"
-        }`}
-      >
-        <DropdownMenu onOpenChange={() => setIsDropdownOpen((prev) => !prev)}>
+    <div className="relative" data-testid={`video-card-${video.id}`}>
+      <div className="absolute top-2 right-2">
+        <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button
               variant="outline"
