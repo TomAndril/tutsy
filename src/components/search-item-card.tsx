@@ -30,6 +30,8 @@ export default function SearchItemCard({ video }: Props) {
     { addSuffix: true }
   );
 
+  const chaptersCount = video.chapters?.length ?? null;
+
   const { mutate, isPending } = useAddVideoToAccount();
 
   return (
@@ -52,6 +54,7 @@ export default function SearchItemCard({ video }: Props) {
             <p>
               {video.viewCount} views • {duration}
             </p>
+            <span>{chaptersCount} chapters</span>
             <p>{publishedDate}</p>
           </div>
         </CardDescription>

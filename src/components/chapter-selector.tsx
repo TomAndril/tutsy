@@ -142,9 +142,13 @@ export default function ChapterSelector({
     <div className="p-2">
       <Drawer>
         <DrawerTrigger asChild>
-          <Button variant={"ghost"} className="w-full">
+          <Button disabled={!isVideoReady} variant={"ghost"} className="w-full">
             Chapters
-            <Icons.arrowUp className="ml-2" size={16} />
+            {isVideoReady ? (
+              <Icons.arrowUp className="ml-2" size={16} />
+            ) : (
+              <Icons.loader className="ml-2 animate-spin" size={16} />
+            )}
           </Button>
         </DrawerTrigger>
         <DrawerPortal>

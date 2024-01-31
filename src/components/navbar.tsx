@@ -15,7 +15,7 @@ interface Props {
 export default function Navbar({ borderBottom = false }: Props) {
   return (
     <div
-      className={`sticky top-0 backdrop-blur-sm z-50 rounded ${
+      className={`sticky top-0 backdrop-blur-xl bg-[var(--navbar-bg)] z-50 rounded ${
         borderBottom ? "border-b" : ""
       }`}
     >

@@ -7,8 +7,8 @@ export default async function SearchPage({
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
   const query = searchParams?.q;
-  
+
   const initialData = await getVideoSearchResults(query as string);
 
-  return <SearchContainer initialData={initialData} query={query as string} />;
+  return <SearchContainer initialData={initialData} query={query as string} /> 
 }
