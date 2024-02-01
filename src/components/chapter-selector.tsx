@@ -158,10 +158,10 @@ export default function ChapterSelector({
           </Button>
         </DrawerTrigger>
         <DrawerPortal>
-          <DrawerOverlay className="fixed inset-0 bg-black/90" />
-          <DrawerContent className="bg-[var(--background)] flex flex-col fixed bottom-0 left-0 right-0 max-h-[96%] rounded-t-[10px]">
+          <DrawerOverlay className="fixed inset-0 bg-white/90 dark:bg-black/90" />
+          <DrawerContent className="bg-white dark:bg-[var(--background)] flex flex-col fixed bottom-0 left-0 right-0 max-h-[96%] rounded-t-[10px]">
             {hasChapters && isVideoReady && (
-              <ScrollArea className="w-full mx-auto flex flex-col overflow-auto p-4 rounded-t-[10px]">
+              <ScrollArea className="w-full mx-auto flex flex-col overflow-auto px-0 py-4 rounded-t-[10px]">
                 {video.chapters.map((chapter) => (
                   <div key={chapter.id}>
                     <DrawerClose className="w-full">
