@@ -146,6 +146,7 @@ export default function YoutubeVideoPlayer({ video, userConfig }: Props) {
               },
             },
           }}
+          playsinline
         />
       </div>
       <ChapterSelector

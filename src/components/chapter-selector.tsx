@@ -104,7 +104,13 @@ export default function ChapterSelector({
                     <h3 className="text-left w-full lg:w-96 lg:truncate px-4 flex items-center">
                       {chapter.title}
                       {currentChapter?.id === chapter.id && (
-                        <Icons.play size={14} className="ml-2" />
+                        <div className="relative">
+                          <Icons.play size={14} className="ml-2 animate-ping" />
+                          <Icons.play
+                            size={14}
+                            className="ml-2 absolute top-0 left-0"
+                          />
+                        </div>
                       )}
                     </h3>
 
@@ -152,8 +158,8 @@ export default function ChapterSelector({
           </Button>
         </DrawerTrigger>
         <DrawerPortal>
-          <DrawerOverlay className="fixed inset-0 bg-black/40" />
-          <DrawerContent className="bg-white flex flex-col fixed bottom-0 left-0 right-0 max-h-[96%] rounded-t-[10px]">
+          <DrawerOverlay className="fixed inset-0 bg-black/90" />
+          <DrawerContent className="bg-[var(--background)] flex flex-col fixed bottom-0 left-0 right-0 max-h-[96%] rounded-t-[10px]">
             {hasChapters && isVideoReady && (
               <ScrollArea className="w-full mx-auto flex flex-col overflow-auto p-4 rounded-t-[10px]">
                 {video.chapters.map((chapter) => (
@@ -173,7 +179,16 @@ export default function ChapterSelector({
                         <h3 className="text-left w-full lg:w-96 lg:truncate px-4 flex items-center">
                           {chapter.title}
                           {currentChapter?.id === chapter.id && (
-                            <Icons.play size={14} className="ml-2" />
+                            <div className="relative">
+                              <Icons.play
+                                size={14}
+                                className="ml-2 animate-ping"
+                              />
+                              <Icons.play
+                                size={14}
+                                className="ml-2 absolute top-0 left-0"
+                              />
+                            </div>
                           )}
                         </h3>
 
