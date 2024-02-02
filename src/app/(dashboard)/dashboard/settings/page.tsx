@@ -16,7 +16,7 @@ export default async function SettingsPage() {
     <div>
       <DashboardHeader
         title="Settings"
-        subheading="Change your player configuration and theme"
+        subheading="Customize your experience"
       />
       <DashboardContent>
         <UserConfigForm session={session as Session} />
