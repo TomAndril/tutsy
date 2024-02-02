@@ -3,5 +3,6 @@ export enum QueryKeys {
   VIDEO = "video",
   VIDEO_DETAILS = "video-details",
   VIDEO_SEARCH = "video-search",
-  USER_CONFIG = "user-config",
+  PLAYER_CONFIG = "player-config",
+  USER_DETAILS = "user-details",
 }
