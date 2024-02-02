@@ -1,6 +1,6 @@
 import Navbar from "@/components/navbar";
 import VideoPlayerContainer from "@/components/video-player-container";
-import { getUserConfiguration } from "@/lib/user";
+import { getPlayerConfig } from "@/lib/user";
 import { getUserVideoById } from "@/lib/videos";
 import { cookies } from "next/headers";
 interface PageProps {
@@ -21,7 +21,7 @@ export async function generateMetadata({ params: { id } }: PageProps) {
 export default async function PlayerPage({ params: { id } }: PageProps) {
   const [initialData, userConfig] = await Promise.all([
     getUserVideoById(id),
-    getUserConfiguration(cookies()),
+    getPlayerConfig(cookies()),
   ]);
 
   return (

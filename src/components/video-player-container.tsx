@@ -6,7 +6,7 @@ import { useQueries } from "@tanstack/react-query";
 import { getUserVideoById } from "@/lib/videos";
 import { QueryKeys } from "@/constants";
 import { Config } from "@prisma/client";
-import { getUserConfiguration } from "@/lib/user";
+import { getPlayerConfig } from "@/lib/user";
 
 interface Props {
   video: VideoWithChapters;
@@ -22,8 +22,8 @@ export default function VideoPlayerContainer({ video, userConfig }: Props) {
         initialData: video,
       },
       {
-        queryKey: [QueryKeys.USER_CONFIG],
-        queryFn: () => getUserConfiguration(),
+        queryKey: [QueryKeys.PLAYER_CONFIG],
+        queryFn: () => getPlayerConfig(),
         initialData: { config: userConfig },
       },
     ],
