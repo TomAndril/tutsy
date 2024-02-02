@@ -54,7 +54,7 @@ export default function NavBarSearch({ isHero = false }: Props) {
         }}
         className={`rounded-r-none rounded-l-full pl-8 focus:ring-1 ring-in focus:ring-slate-100 dark:focus:ring-slate-800 ${
           isHero
-            ? "h-16 placeholder:text-lg placeholder:italic placeholder:font-semibold text-lg"
+            ? "h-12 md:h-16 placeholder:text-sm md:placeholder:text-lg placeholder:italic placeholder:font-semibold text-lg"
             : ""
         }`}
         placeholder={getPlaceholder()}
@@ -62,7 +62,7 @@ export default function NavBarSearch({ isHero = false }: Props) {
       />
       <Button
         className={`bg-slate-300 dark:bg-slate-700 rounded-r-full p-[11px] px-8 cursor-pointer text-black hover:text-white dark:text-white ${
-          isHero ? "h-16" : ""
+          isHero ? " h-12 md:h-16 px-4 md:px-8" : ""
         }`}
         onClick={onSubmit}
       >

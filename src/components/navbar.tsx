@@ -29,10 +29,9 @@ export default function Navbar({ borderBottom = false }: Props) {
           </Button>
           <Badge variant="secondary">BETA</Badge>
         </div>
-        <div className="hidden md:flex w-3/6">
+        <div className="hidden md:flex w-2/5">
           <NavBarSearch />
         </div>
-
         <NavBarRightSide />
       </nav>
     </div>
