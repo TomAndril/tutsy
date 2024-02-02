@@ -1,13 +1,10 @@
 import { toast } from "@/components/ui/use-toast";
-import { QueryKeys } from "@/constants";
-import { updatePlayerConfig } from "@/lib/user";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { updateUserDetails } from "@/lib/user";
+import { useMutation } from "@tanstack/react-query";
 
-export default function useUpdatePlayerConfig() {
-  const queryClient = useQueryClient();
-
+export default function useUpdateUserDetails() {
   return useMutation({
-    mutationFn: updatePlayerConfig,
+    mutationFn: updateUserDetails,
     onError: () => {
       return toast({
         variant: "destructive",
@@ -16,10 +13,6 @@ export default function useUpdatePlayerConfig() {
       });
     },
     onSettled: () => {
-      queryClient.invalidateQueries({
-        queryKey: [QueryKeys.PLAYER_CONFIG],
-      });
-
       return toast({
         variant: "default",
         title: "Settings updated",

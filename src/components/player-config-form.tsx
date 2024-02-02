@@ -10,7 +10,7 @@ import useUpdateUserConfig from "@/hooks/use-update-user-config";
 import { Icons } from "./icons";
 import { useQuery } from "@tanstack/react-query";
 import { QueryKeys } from "@/constants";
-import { getUserConfiguration } from "@/lib/user";
+import { getPlayerConfig } from "@/lib/user";
 
 interface Props {
   config: Config;
@@ -19,11 +19,11 @@ interface Props {
 export default function PlayerConfigForm({ config }: Props) {
   const { data } = useQuery({
     initialData: { config },
-    queryKey: [QueryKeys.USER_CONFIG],
-    queryFn: () => getUserConfiguration(),
+    queryKey: [QueryKeys.PLAYER_CONFIG],
+    queryFn: () => getPlayerConfig(),
   });
 
-  const form = useForm<{ userConfig: Config }>({
+  const form = useForm<{ userConfig: Pick<Config, "jumpToLastChapter"> }>({
     resolver: zodResolver(playerConfigSchema),
     defaultValues: {
       userConfig: {

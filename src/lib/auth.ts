@@ -12,10 +12,15 @@ export const authOptions: NextAuthOptions = {
       return session;
     },
 
-    jwt: async ({ token, user }) => {
+    jwt: async ({ token, user, trigger, session }) => {
+      if (trigger === "update" && session?.user) {
+        token.name = session.user.name;
+      }
+
       if (user) {
         token.sub = user.id;
       }
+
       return token;
     },
   },
