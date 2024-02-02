@@ -62,7 +62,7 @@ export default function UserConfigForm({ session }: Props) {
               <FormControl>
                 <Input {...field} />
               </FormControl>
-              <FormDescription>Your public display name.</FormDescription>
+              <FormDescription>Your public display name</FormDescription>
               <FormMessage />
             </FormItem>
           )}
