@@ -51,7 +51,7 @@ export default function UserConfigForm({ session }: Props) {
       <h2 className="text-lg">User Settings</h2>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="border-dashed border rounded p-6 my-2"
+        className="border-dashed border rounded p-6 my-2 mb-8"
       >
         <FormField
           name="name"
