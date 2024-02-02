@@ -5,12 +5,19 @@ import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
+import useAnimatedPlaceholder from "@/hooks/use-animated-placeholder";
 
-export default function NavBarSearch() {
+interface Props {
+  isHero?: boolean;
+}
+
+export default function NavBarSearch({ isHero = false }: Props) {
   const [query, setQuery] = useState("");
 
   const router = useRouter();
   const pathName = usePathname();
+
+  const placeholder = useAnimatedPlaceholder();
 
   function onSubmit() {
     if (query === "") {
@@ -27,6 +34,14 @@ export default function NavBarSearch() {
     };
   }, [pathName]);
 
+  const getPlaceholder = () => {
+    if (isHero) {
+      return placeholder;
+    }
+
+    return "Search";
+  };
+
   return (
     <>
       <Input
@@ -37,15 +52,21 @@ export default function NavBarSearch() {
             onSubmit();
           }
         }}
-        className="rounded-r-none rounded-l-full pl-8 focus:ring-1 ring-in focus:ring-slate-100 dark:focus:ring-slate-800"
-        placeholder="Search"
+        className={`rounded-r-none rounded-l-full pl-8 focus:ring-1 ring-in focus:ring-slate-100 dark:focus:ring-slate-800 ${
+          isHero
+            ? "h-16 placeholder:text-lg placeholder:italic placeholder:font-semibold text-lg"
+            : ""
+        }`}
+        placeholder={getPlaceholder()}
         type="search"
       />
       <Button
-        className="bg-slate-300 dark:bg-slate-700 rounded-r-full p-[11px] px-8 cursor-pointer"
+        className={`bg-slate-300 dark:bg-slate-700 rounded-r-full p-[11px] px-8 cursor-pointer text-black hover:text-white dark:text-white ${
+          isHero ? "h-16" : ""
+        }`}
         onClick={onSubmit}
       >
-        <Icons.search size={18} className="text-black dark:text-white" />
+        <Icons.search size={isHero ? 20 : 16} />
       </Button>
     </>
   );
