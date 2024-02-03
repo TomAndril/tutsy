@@ -13,7 +13,7 @@ export default function Hero() {
         <span className="font-black italic">Reinvented</span>
       </h1>
       <p className="mt-8 text-center font-extralight text-base md:text-lg lg:text-xl max-w-2xl mx-auto">
-        Tuti is a new way to learn from YouTube videos. It&apos;s a platform that
+        Tutsy is a new way to learn from YouTube videos. It&apos;s a platform that
         allows you to learn from the best content creators on YouTube, without
         the distractions.
       </p>

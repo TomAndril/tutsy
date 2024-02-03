@@ -5,8 +5,14 @@ import ThemeSelectorForm from "@/components/theme-selector-form";
 import UserConfigForm from "@/components/user-config-form";
 import { authOptions } from "@/lib/auth";
 import { getPlayerConfig } from "@/lib/user";
+import { Metadata } from "next";
 import { Session, getServerSession } from "next-auth";
 import { cookies } from "next/headers";
+
+export const metadata: Metadata = {
+  title: "Tutsy / Settings",
+  description: "Customize your experience",
+};
 
 export default async function SettingsPage() {
   const { config } = await getPlayerConfig(cookies());

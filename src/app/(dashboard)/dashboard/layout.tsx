@@ -3,10 +3,16 @@ import { getCurrentUser } from "@/lib/session";
 
 import DashboardAside from "@/components/dashboard-aside";
 import Navbar from "@/components/navbar";
+import { Metadata } from "next";
 
 interface DashboardLayoutProps {
   children: React.ReactNode;
 }
+
+export const metadata: Metadata = {
+  title: "Tutsy / Videos",
+  description: "Tutsy videos dashboard",
+};
 
 export default async function DashboardLayout({
   children,

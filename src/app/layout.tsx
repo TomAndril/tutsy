@@ -9,8 +9,8 @@ import { Toaster } from "@/components/ui/toaster";
 import ReactQueryWrapper from "@/components/providers/react-query-provider";
 
 export const metadata: Metadata = {
-  title: "Tuti",
-  description: "Learn new things for free",
+  title: "Tutsy",
+  description: "YouTube learning, reinvented.",
 };
 
 export default function RootLayout({

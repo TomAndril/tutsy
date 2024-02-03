@@ -4,7 +4,7 @@ import FetchVideoDetails from "@/components/fetch-video-details";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Add Video | tuti",
+  title: "Add Video | tutsy",
   description: "A simple app to help you learn new things.",
 };
 

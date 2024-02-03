@@ -25,7 +25,7 @@ export default function Navbar({ borderBottom = false }: Props) {
         </div>
         <div className="-ml-4 hidden md:flex items-center justify-center">
           <Button asChild variant="link" className="font-mono">
-            <Link href="/">Tuti</Link>
+            <Link href="/">Tutsy</Link>
           </Button>
           <Badge variant="secondary">BETA</Badge>
         </div>

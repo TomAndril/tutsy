@@ -13,7 +13,7 @@ export async function generateMetadata({ params: { id } }: PageProps) {
   const video = await getUserVideoById(id);
 
   return {
-    title: `${video.title} | tuti`,
+    title: `${video.title} | tutsy`,
     description: "A simple app to help you learn new things.",
   };
 }

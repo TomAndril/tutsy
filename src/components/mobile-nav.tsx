@@ -22,7 +22,7 @@ export default function MobileNav() {
         <SheetHeader>
           <SheetTitle>
             <Button asChild variant="link" className="font-mono">
-              <Link href="/">Tuti</Link>
+              <Link href="/">Tutsy</Link>
             </Button>
             <Badge variant="secondary">Beta</Badge>
           </SheetTitle>
