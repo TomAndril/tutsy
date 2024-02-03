@@ -60,20 +60,24 @@ export default function UserConfigForm({ session }: Props) {
             <FormItem>
               <FormLabel>Name</FormLabel>
               <FormControl>
-                <Input {...field} />
+                <div className='flex items-center max-w-xl'>
+                  <Input {...field} />
+                  <Button type="submit" className="ml-2">
+                    Submit
+                    {mutator.isPending && (
+                      <Icons.loader size={14} className="animate-spin ml-2" />
+                    )}
+                  </Button>
+                </div>
               </FormControl>
               <FormDescription>Your public display name</FormDescription>
               <FormMessage />
             </FormItem>
           )}
         />
-        <Button className="mt-4" type="submit">
-          Submit
-          {mutator.isPending && (
-            <Icons.loader size={14} className="animate-spin ml-2" />
-          )}
-        </Button>
-        <p className='text-xs mt-4 text-right font-light'>ID: {session.user.id}</p>
+        <p className="text-xs mt-4 font-light">
+          ID: {session.user.id}
+        </p>
       </form>
     </Form>
   );
