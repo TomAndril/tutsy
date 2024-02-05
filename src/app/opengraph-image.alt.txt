@@ -1,0 +1,1 @@
+<meta property="og:image:alt" content="Tutsy - YouTube Learning, Reinvented." />

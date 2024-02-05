@@ -12,6 +12,13 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 export const metadata: Metadata = {
   title: "Tutsy",
   description: "YouTube learning, reinvented.",
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://tutsy.com",
+    siteName: "Tutsy",
+  },
+  metadataBase: new URL("https://tutsy.com"),
 };
 
 export default function RootLayout({
