@@ -27,7 +27,6 @@ export const metadata: Metadata = {
         height: ogImage.height,
         width: ogImage.width,
         alt: "Tutsy",
-
       },
     ],
   },
