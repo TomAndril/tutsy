@@ -7,6 +7,7 @@ import NextAuthProvider from "@/components/providers/next-auth-provider";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { Toaster } from "@/components/ui/toaster";
 import ReactQueryWrapper from "@/components/providers/react-query-provider";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export const metadata: Metadata = {
   title: "Tutsy",
@@ -26,6 +27,7 @@ export default function RootLayout({
             <ReactQueryWrapper>
               {children}
               <Analytics />
+              <SpeedInsights />
               <Toaster />
             </ReactQueryWrapper>
           </ThemeProvider>
