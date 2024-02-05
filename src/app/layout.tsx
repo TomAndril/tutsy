@@ -13,12 +13,42 @@ export const metadata: Metadata = {
   title: "Tutsy",
   description: "YouTube learning, reinvented.",
   openGraph: {
+    title: "Tutsy",
+    description: "YouTube learning, reinvented.",
     type: "website",
     locale: "en_US",
     url: "https://tutsy.com",
     siteName: "Tutsy",
+    images: [{
+      url: '/opengraph-image.png',
+      width: 1200,
+      height: 630,
+      alt: "Tutsy",
+    }]
   },
   metadataBase: new URL("https://tutsy.com"),
+  generator: "Tutsy",
+  applicationName: "Tutsy",
+  referrer: "origin-when-cross-origin",
+  keywords: [
+    "tutsy",
+    "youtube",
+    "learning",
+    "reinvented",
+    "tutorials",
+    "videos",
+    "courses",
+    "education",
+    "programming",
+    "development",
+    "design",
+    "web",
+  ],
+  authors: [{
+    name: "Tutsy"
+  }],
+  creator: "Tutsy",
+  publisher: "Tutsy",
 };
 
 export default function RootLayout({
