@@ -26,7 +26,7 @@ export const metadata: Metadata = {
       alt: "Tutsy",
     }]
   },
-  metadataBase: new URL("https://tutsy.com"),
+  metadataBase: new URL("https://tutsy.com/"),
   generator: "Tutsy",
   applicationName: "Tutsy",
   referrer: "origin-when-cross-origin",
