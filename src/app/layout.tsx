@@ -9,6 +9,8 @@ import { Toaster } from "@/components/ui/toaster";
 import ReactQueryWrapper from "@/components/providers/react-query-provider";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
+import ogImage from "@/assets/opengraph-image.png";
+
 export const metadata: Metadata = {
   title: "Tutsy",
   description: "YouTube learning, reinvented.",
@@ -19,12 +21,14 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "https://tutsy.com",
     siteName: "Tutsy",
-    images: [{
-      url: '/opengraph-image.png',
-      width: 1200,
-      height: 630,
-      alt: "Tutsy",
-    }]
+    images: [
+      {
+        url: ogImage.src,
+        height: ogImage.height,
+        width: ogImage.width,
+        alt: "Tutsy",
+      },
+    ],
   },
   metadataBase: new URL("https://tutsy.com/"),
   generator: "Tutsy",
@@ -44,9 +48,11 @@ export const metadata: Metadata = {
     "design",
     "web",
   ],
-  authors: [{
-    name: "Tutsy"
-  }],
+  authors: [
+    {
+      name: "Tutsy",
+    },
+  ],
   creator: "Tutsy",
   publisher: "Tutsy",
 };
