@@ -7,6 +7,7 @@ import { Button } from "./ui/button";
 import NavBarSearch from "./navbar-search";
 
 import MobileNav from "./mobile-nav";
+import NavBarLeftSide from "./navbar-left-side";
 
 interface Props {
   borderBottom?: boolean;
@@ -24,10 +25,7 @@ export default function Navbar({ borderBottom = false }: Props) {
           <MobileNav />
         </div>
         <div className="-ml-4 hidden md:flex items-center justify-center">
-          <Button asChild variant="link" className="font-mono">
-            <Link href="/">Tutsy</Link>
-          </Button>
-          <Badge variant="secondary">BETA</Badge>
+          <NavBarLeftSide />
         </div>
         <div className="hidden md:flex w-2/5">
           <NavBarSearch />

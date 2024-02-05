@@ -6,10 +6,6 @@ const getFirstLetter = (str: string) => {
   return str[0];
 };
 
-const capitalize = (str: string) => {
-  return str[0].toUpperCase() + str.slice(1);
-};
-
 const getVideoId = (url: string) => {
   const urlParts = url.split(/(vi\/|v=|\/v\/|youtu\.be\/|\/embed\/)/);
   const id =
@@ -48,4 +44,4 @@ export const calculatePercentage = (
 export const wait = (ms: number) =>
   new Promise((resolve) => setTimeout(resolve, ms));
 
-export { getFirstWord, getFirstLetter, capitalize, getVideoId };
+export { getFirstWord, getFirstLetter, getVideoId };

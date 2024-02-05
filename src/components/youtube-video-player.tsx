@@ -125,7 +125,7 @@ export default function YoutubeVideoPlayer({ video, userConfig }: Props) {
     >
       <div className="max-h-[80vh] border-r relative group">
         {hasChapters && !!currentChapter && (
-          <div className="absolute left-8 top-4 text-sm opacity-0 group-hover:opacity-100 transition-all px-4 rounded backdrop-blur shadow py-2 border">
+          <div className="absolute left-8 top-4 text-xs opacity-0 group-hover:opacity-100 transition-all px-4 rounded backdrop-blur shadow py-2 border bg-white text:black dark:bg-black dark:text-white">
             {currentChapter.title}
           </div>
         )}

@@ -12,7 +12,6 @@ import {
   SelectItem,
 } from "./ui/select";
 import { useTheme } from "next-themes";
-import { capitalize } from "@/utils";
 
 export default function ThemeSelectorForm() {
   const form = useForm<{ theme: Theme }>({
@@ -37,13 +36,13 @@ export default function ThemeSelectorForm() {
               >
                 <FormControl>
                   <SelectTrigger className="max-w-xs">
-                    <SelectValue placeholder={capitalize(theme ?? "")} />
+                    <SelectValue placeholder={theme} />
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
                   {themeValues.map((elem) => (
                     <SelectItem key={elem} value={elem}>
-                      {capitalize(elem)}
+                      <span className="capitalize">{elem}</span>
                     </SelectItem>
                   ))}
                 </SelectContent>
