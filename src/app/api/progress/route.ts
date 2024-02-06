@@ -20,6 +20,12 @@ export async function GET(req: NextRequest) {
       },
     });
 
+    if (!userVideo) {
+      return NextResponse.json({
+        error: "Video not found",
+      });
+    }
+
     const videoChapters = await db.chapter.findMany({
       where: {
         videoId: userVideo?.id,

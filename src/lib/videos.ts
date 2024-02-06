@@ -26,7 +26,7 @@ export async function getUserVideoById(videoId: string) {
       videoId,
     },
   });
-  return data as VideoWithChapters;
+  return data as VideoWithChapters & { error?: string };
 }
 
 export async function deleteVideoFromUserAccount(videoId: string) {
