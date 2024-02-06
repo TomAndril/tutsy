@@ -25,6 +25,8 @@ export default function YoutubeVideoPlayer({ video, userConfig }: Props) {
 
   const playerRef = useRef<ReactPlayer>(null);
 
+  const hasChapters = video.chapters?.length > 0;
+
   const handleJumpToChapter = useCallback((ms: number) => {
     playerRef.current?.seekTo(ms);
     setIsPlaying(true);
@@ -35,8 +37,9 @@ export default function YoutubeVideoPlayer({ video, userConfig }: Props) {
       const currentChapterIndex =
         video.chapters.findIndex((c) => c.startTime >= playedSeconds) - 1;
 
-      const isFinalChapter =
-        playedSeconds >= video.chapters[video.chapters.length - 1].startTime;
+      const isFinalChapter = hasChapters
+        ? playedSeconds >= video.chapters[video.chapters.length - 1].startTime
+        : false;
 
       setCurrentChapter(
         video.chapters[
@@ -65,7 +68,7 @@ export default function YoutubeVideoPlayer({ video, userConfig }: Props) {
         mutate(video.chapters[currentChapterIndex]);
       }
     },
-    [video.chapters, video.duration, isPending, mutate]
+    [video.chapters, video.duration, isPending, mutate, hasChapters]
   );
 
   const handleOnReady = () => {
@@ -114,8 +117,6 @@ export default function YoutubeVideoPlayer({ video, userConfig }: Props) {
     setIsVideoReady(true);
     setIsPlaying(true);
   };
-
-  const hasChapters = video.chapters?.length > 0;
 
   return (
     <div

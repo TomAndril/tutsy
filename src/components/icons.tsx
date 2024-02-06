@@ -12,7 +12,8 @@ import {
   Check,
   Info,
   Menu,
-  ArrowUpNarrowWide
+  ArrowUpNarrowWide,
+  History
 } from "lucide-react";
 
 export const Icons = {
@@ -29,7 +30,8 @@ export const Icons = {
   check: Check,
   info: Info,
   menu: Menu,
-  arrowUp: ArrowUpNarrowWide
+  arrowUp: ArrowUpNarrowWide,
+  history: History
 };
 
 export type IconName = keyof typeof Icons;

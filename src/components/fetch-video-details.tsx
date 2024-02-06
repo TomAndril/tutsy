@@ -35,7 +35,8 @@ export default function FetchVideoDetails() {
     form.watch("videoUrl")
   );
 
-  function onSubmit() {
+  function onSubmit({videoUrl}: AddVideoSchema) {
+    if (data?.videoId === videoUrl.split("v=")[1]) return;
     refetch();
   }
 
@@ -51,7 +52,7 @@ export default function FetchVideoDetails() {
                 <FormItem>
                   <FormLabel>Video url</FormLabel>
                   <FormControl>
-                    <div className="flex w-full items-center">
+                    <div className="flex max-w-xl items-center">
                       <Input
                         data-testid="add-video-input"
                         disabled={isFetching}
