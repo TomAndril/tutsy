@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     description: "YouTube learning, reinvented.",
     type: "website",
     locale: "en_US",
-    url: "https://tutsy.com",
+    url: "https://tutsy.io",
     siteName: "Tutsy",
     images: [
       {
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
       },
     ],
   },
-  metadataBase: new URL("https://tutsy.com/"),
+  metadataBase: new URL("https://tutsy.io/"),
   generator: "Tutsy",
   applicationName: "Tutsy",
   referrer: "origin-when-cross-origin",
