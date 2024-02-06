@@ -9,8 +9,6 @@ import { Toaster } from "@/components/ui/toaster";
 import ReactQueryWrapper from "@/components/providers/react-query-provider";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
-import ogImage from "@/assets/opengraph-image.png";
-
 export const metadata: Metadata = {
   title: "Tutsy",
   description: "YouTube learning, reinvented.",
@@ -21,14 +19,6 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "https://tutsy.io",
     siteName: "Tutsy",
-    images: [
-      {
-        url: ogImage.src,
-        height: ogImage.height,
-        width: ogImage.width,
-        alt: "Tutsy",
-      },
-    ],
   },
   metadataBase: new URL("https://tutsy.io/"),
   generator: "Tutsy",
