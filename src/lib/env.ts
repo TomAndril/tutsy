@@ -8,7 +8,7 @@ function getHost() {
   if (env === "development") {
     return "http://localhost:3000";
   } else {
-    return "https://tutsy.io";
+    return "https://www.tutsy.io";
   }
 }
 
