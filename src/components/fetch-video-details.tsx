@@ -35,8 +35,22 @@ export default function FetchVideoDetails() {
     form.watch("videoUrl")
   );
 
-  function onSubmit({videoUrl}: AddVideoSchema) {
-    if (data?.videoId === videoUrl.split("v=")[1]) return;
+  const extractIdFromUrl = (url: string) => {
+    const withVFormat = url.split("v=")[1];
+    const withShortFormat = url.split("youtu.be/")[1]?.split("?")[0];
+
+    if (withVFormat) {
+      return withVFormat;
+    } else {
+      return withShortFormat;
+    }
+  };
+
+  function onSubmit({ videoUrl }: AddVideoSchema) {
+    const videoId = extractIdFromUrl(videoUrl);
+
+    if (videoId === data?.videoId) return;
+
     refetch();
   }
 
