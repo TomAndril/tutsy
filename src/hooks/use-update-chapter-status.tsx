@@ -8,7 +8,13 @@ export default function useUpdateChapterStatus(video: VideoWithChapters) {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (chapter: Chapter) => updateChapterStatus(chapter),
+    mutationFn: ({
+      chapter,
+      hasCompletedAllChapters,
+    }: {
+      chapter: Chapter;
+      hasCompletedAllChapters: boolean;
+    }) => updateChapterStatus(chapter, hasCompletedAllChapters),
     onSettled: async () => {
       return await queryClient.invalidateQueries({
         queryKey: [QueryKeys.VIDEO, video.youtubeId],

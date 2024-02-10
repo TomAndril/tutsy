@@ -43,9 +43,13 @@ export async function resetVideoProgress(videoId: string) {
   });
 }
 
-export async function updateChapterStatus(chapter: Chapter) {
+export async function updateChapterStatus(
+  chapter: Chapter,
+  hasCompletedAllChapters: boolean
+) {
   await axios.patch(getHost() + "/api/progress", {
     chapterId: chapter.id,
+    hasCompletedAllChapters,
   });
 }
 

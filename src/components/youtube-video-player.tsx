@@ -13,6 +13,14 @@ interface Props {
   userConfig: Config;
 }
 
+const hasCompletedAllChapters = (
+  chapters: Chapter[],
+  currentChapterIndex: number
+) => {
+  chapters[currentChapterIndex].completed = true;
+  return chapters.every((c) => c.completed);
+};
+
 // TODO: Cleanup this file as it's a mess. Maybe split it into multiple
 // components or extract some logic into hooks
 
@@ -53,7 +61,13 @@ export default function YoutubeVideoPlayer({ video, userConfig }: Props) {
         !isPending &&
         !video.chapters[video.chapters.length - 1]?.completed
       ) {
-        return mutate(video.chapters[video.chapters.length - 1]);
+        return mutate({
+          chapter: video.chapters[video.chapters.length - 1],
+          hasCompletedAllChapters: hasCompletedAllChapters(
+            video.chapters,
+            video.chapters.length - 1
+          ),
+        });
       }
 
       const nextChapterStartTime =
@@ -65,7 +79,13 @@ export default function YoutubeVideoPlayer({ video, userConfig }: Props) {
         playedSeconds > 5;
 
       if (hasToUpdateChapter && !isPending) {
-        mutate(video.chapters[currentChapterIndex]);
+        mutate({
+          chapter: video.chapters[currentChapterIndex],
+          hasCompletedAllChapters: hasCompletedAllChapters(
+            video.chapters,
+            currentChapterIndex
+          ),
+        });
       }
     },
     [video.chapters, video.duration, isPending, mutate, hasChapters]
@@ -152,7 +172,14 @@ export default function YoutubeVideoPlayer({ video, userConfig }: Props) {
       </div>
       <ChapterSelector
         video={video}
-        variables={variables}
+        variables={{
+          id: "",
+          title: "",
+          startTime: 0,
+          videoId: null,
+          completed: false,
+          completedAt: null,
+        }}
         currentChapter={currentChapter}
         handleJumpToChapter={handleJumpToChapter}
         isPending={isPending}

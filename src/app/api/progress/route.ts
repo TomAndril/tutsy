@@ -45,7 +45,7 @@ export async function GET(req: NextRequest) {
 
 export async function PATCH(req: NextRequest) {
   try {
-    const { chapterId } = await req.json();
+    const { chapterId, hasCompletedAllChapters } = await req.json();
 
     const mutation = await db.chapter.update({
       where: {
@@ -56,6 +56,17 @@ export async function PATCH(req: NextRequest) {
         completedAt: new Date(),
       },
     });
+
+    if (hasCompletedAllChapters && !!mutation) {
+      await db.video.update({
+        where: {
+          id: mutation?.videoId ?? undefined,
+        },
+        data: {
+          completed: true,
+        },
+      });
+    }
 
     return NextResponse.json({ data: mutation });
   } catch (error) {
@@ -74,6 +85,15 @@ export async function PUT(req: NextRequest) {
       data: {
         completed: false,
         completedAt: null,
+      },
+    })
+
+    await db.video.update({
+      where: {
+        id: videoId,
+      },
+      data: {
+        completed: false,
       },
     });
 
