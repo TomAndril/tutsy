@@ -3,8 +3,9 @@ import { useEffect, useState } from "react";
 const placeholders = [
   "Figma for Developers",
   "Weekly Meal Prep",
-  "TypeScript Crash Crouse",
-  "App Design for Beginners",
+  "Home Gardening For Dummies",
+  "Guitar Lessons",
+  "Web Development Bootcamp",
 ];
 
 export default function useAnimatedPlaceholder() {
