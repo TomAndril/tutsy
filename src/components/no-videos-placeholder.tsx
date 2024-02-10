@@ -8,9 +8,13 @@ export default function NoVideosPlaceholder() {
       <div className="bg-slate-200 dark:bg-slate-700 p-4 rounded-full flex items-center justify-center">
         <Icons.youtube size={48} />
       </div>
-      <h2 className="mt-4 text-xl font-semibold">No videos added</h2>
-      <p className="mt-2">You don&apos;t have any videos yet. Add a new one </p>
-      <Button className="mt-8" variant="secondary" asChild>
+      <div className="px-4 text-center">
+        <h2 className="mt-4 text-base font-semibold">No videos added</h2>
+        <p className="mt-2 text-sm">
+          You don&apos;t have any videos yet. Add a new one
+        </p>
+      </div>
+      <Button className="mt-8" size="sm" asChild>
         <Link href="/dashboard/add">
           <Icons.plus size={14} />
           <span className="ml-2">Add Video</span>

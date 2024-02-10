@@ -16,7 +16,7 @@ export default async function Dashboard() {
         title="Videos"
         subheading="Browse your videos"
       >
-        <Button size="sm" variant="secondary" asChild>
+        <Button size="sm" asChild>
           <Link href="/dashboard/add">
             <Icons.plus size={12} className="mr-2" />
             <span>Add video</span>
