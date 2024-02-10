@@ -1,8 +1,4 @@
 import NavBarRightSide from "./navbar-right-side";
-import Link from "next/link";
-
-import { Badge } from "./ui/badge";
-import { Button } from "./ui/button";
 
 import NavBarSearch from "./navbar-search";
 

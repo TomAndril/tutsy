@@ -6,6 +6,7 @@ import { Input } from "./ui/input";
 import { useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import useAnimatedPlaceholder from "@/hooks/use-animated-placeholder";
+import { track } from "@vercel/analytics";
 
 interface Props {
   isHero?: boolean;
@@ -23,6 +24,10 @@ export default function NavBarSearch({ isHero = false }: Props) {
     if (query === "") {
       return;
     }
+
+    track("search", {
+      search_term: query,
+    });
 
     router.push(`/search?q=${query}`);
     setQuery("");
