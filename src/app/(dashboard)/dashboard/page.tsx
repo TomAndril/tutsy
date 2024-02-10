@@ -14,11 +14,11 @@ export default async function Dashboard() {
     <div data-testid="dashboard-videos">
       <DashboardHeader
         title="Videos"
-        subheading="Browse your videos and add new ones"
+        subheading="Browse your videos"
       >
-        <Button size="lg" variant="secondary" asChild>
+        <Button size="sm" variant="secondary" asChild>
           <Link href="/dashboard/add">
-            <Icons.plus size={14} className="mr-2" />
+            <Icons.plus size={12} className="mr-2" />
             <span>Add video</span>
           </Link>
         </Button>

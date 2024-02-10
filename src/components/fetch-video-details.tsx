@@ -87,7 +87,7 @@ export default function FetchVideoDetails() {
                     </div>
                   </FormControl>
                   <FormDescription>
-                    The youtube URL of the video you want to add
+                    The youtube URL
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
