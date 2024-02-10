@@ -5,9 +5,13 @@ import { Progress } from "./ui/progress";
 
 interface Props {
   chapters: Chapter[];
+  withLabel?: boolean;
 }
 
-export default function VideoProgressBar({ chapters }: Props) {
+export default function VideoProgressBar({
+  chapters,
+  withLabel = true,
+}: Props) {
   const chaptersWatched = chapters.reduce((acc, curr) => {
     if (curr.completed) {
       acc = acc + 1;
@@ -28,10 +32,12 @@ export default function VideoProgressBar({ chapters }: Props) {
 
   if (totalChapters) {
     return (
-      <div>
-        <span className="text-xs">
-          {chaptersWatched} of {totalChapters} chapters watched
-        </span>
+      <div className="w-full">
+        {withLabel && (
+          <span className="text-xs">
+            {chaptersWatched} of {totalChapters} chapters watched
+          </span>
+        )}
         <Progress value={progress} />
       </div>
     );

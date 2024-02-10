@@ -1,4 +1,5 @@
 import Navbar from "@/components/navbar";
+import PlayerVideoData from "@/components/player-video-data";
 import VideoPlayerContainer from "@/components/video-player-container";
 import { getPlayerConfig } from "@/lib/user";
 import { getUserVideoById } from "@/lib/videos";
@@ -38,6 +39,7 @@ export default async function PlayerPage({ params: { id } }: PageProps) {
         video={initialData}
         userConfig={userConfig.config}
       />
+      <PlayerVideoData {...initialData} />
     </>
   );
 }
