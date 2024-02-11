@@ -3,17 +3,11 @@
 import { RevealList } from "next-reveal";
 import NavBarSearch from "./navbar-search";
 import Spotlight from "./spotlight";
-import { useTheme } from "next-themes";
 
 export default function Hero() {
-  const { resolvedTheme } = useTheme();
-
   return (
     <>
-      <Spotlight
-        className="-top-40 left-0 md:left-60 md:-top-20 overflow-hidden"
-        fill={resolvedTheme === "dark" ? "white" : "black"}
-      />
+      <Spotlight className="-top-40 left-0 md:left-60 md:-top-20 overflow-hidden" />
       <RevealList interval={200} delay={100}>
         <h1 className="text-5xl md:text-7xl lg:text-9xl font-semibold tracking-tighter pt-16 text-center font-mono drop-shadow-lg bg-gradient-to-b from-black dark:from-white via-slate-900 dark:via-slate-100 to-slate-700 dark:to-slate-200 bg-clip-text text-transparent">
           YouTube learning
