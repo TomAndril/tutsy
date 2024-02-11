@@ -54,7 +54,7 @@ export default function RootLayout({
 }) {
   return (
     <NextAuthProvider>
-      <html lang="en" className={`${GeistSans.variable} ${GeistMono.variable}`}>
+      <html lang="en" className={`${GeistSans.variable} ${GeistMono.variable} sr`}>
         <body>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             <ReactQueryWrapper>
