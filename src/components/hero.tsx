@@ -11,7 +11,7 @@ export default function Hero() {
   return (
     <>
       <Spotlight
-        className="-top-40 left-0 md:left-60 md:-top-20"
+        className="-top-40 left-0 md:left-60 md:-top-20 overflow-hidden"
         fill={resolvedTheme === "dark" ? "white" : "black"}
       />
       <RevealList interval={200} delay={100}>
