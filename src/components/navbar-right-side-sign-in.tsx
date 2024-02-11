@@ -6,7 +6,7 @@ import { signIn } from "next-auth/react";
 export default function NavBarRightSideSignIn() {
   return (
     <div>
-      <Button onClick={() => signIn()}>Sign In</Button>
+      <Button size="sm" onClick={() => signIn()}>Sign In</Button>
     </div>
   );
 }
