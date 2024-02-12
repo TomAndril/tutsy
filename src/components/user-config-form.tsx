@@ -48,11 +48,11 @@ export default function UserConfigForm({ session }: Props) {
 
   return (
     <Form {...form}>
-      <h2 className="text-lg">User Settings</h2>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="border-dashed border rounded p-6 my-2 mb-8"
+        className="border-dashed border rounded p-6 my-2 mb-4"
       >
+        <h2 className="text-md font-semibold mb-2">User Settings</h2>
         <FormField
           name="name"
           control={form.control}
@@ -60,7 +60,7 @@ export default function UserConfigForm({ session }: Props) {
             <FormItem>
               <FormLabel>Name</FormLabel>
               <FormControl>
-                <div className='flex items-center max-w-xl'>
+                <div className="flex items-center max-w-md">
                   <Input {...field} />
                   <Button type="submit" className="ml-2">
                     Submit
@@ -75,9 +75,6 @@ export default function UserConfigForm({ session }: Props) {
             </FormItem>
           )}
         />
-        <p className="text-xs mt-4 font-light">
-          ID: {session.user.id}
-        </p>
       </form>
     </Form>
   );

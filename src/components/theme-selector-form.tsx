@@ -22,8 +22,8 @@ export default function ThemeSelectorForm() {
 
   return (
     <Form {...form}>
-      <h2 className="mt-8 mb-2 text-lg">Visuals</h2>
-      <form className="border-dashed border rounded p-4">
+      <form className="border-dashed border rounded p-6">
+        <h2 className="text-md font-semibold mb-2">Visuals</h2>
         <FormField
           control={form.control}
           name="theme"

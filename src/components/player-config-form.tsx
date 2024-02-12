@@ -36,8 +36,8 @@ export default function PlayerConfigForm({ config }: Props) {
 
   return (
     <Form {...form}>
-      <h2 className="text-lg">Player Settings</h2>
-      <form className="border-dashed border rounded p-6 my-2">
+      <form className="border-dashed border rounded p-6 mb-4">
+        <h2 className="text-md font-semibold mb-2">Player Settings</h2>
         <FormField
           control={form.control}
           name="userConfig"
