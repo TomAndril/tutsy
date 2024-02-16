@@ -10,7 +10,7 @@ export default function VideoList({ videos }: Props) {
   return (
     <Tabs defaultValue="all" className="my-4">
       <TabsList>
-        <TabsTrigger value="all">All Videos</TabsTrigger>
+        <TabsTrigger value="all">All</TabsTrigger>
         <TabsTrigger value="in-progress">In Progress</TabsTrigger>
         <TabsTrigger value="completed">Completed</TabsTrigger>
       </TabsList>

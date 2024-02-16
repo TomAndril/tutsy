@@ -8,6 +8,7 @@ import { ThemeProvider } from "@/components/providers/theme-provider";
 import { Toaster } from "@/components/ui/toaster";
 import ReactQueryWrapper from "@/components/providers/react-query-provider";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import PageLoaderIndicator from "@/components/ui/page-loader-indicator";
 
 export const metadata: Metadata = {
   title: "Tutsy",
@@ -54,7 +55,10 @@ export default function RootLayout({
 }) {
   return (
     <NextAuthProvider>
-      <html lang="en" className={`${GeistSans.variable} ${GeistMono.variable} sr`}>
+      <html
+        lang="en"
+        className={`${GeistSans.variable} ${GeistMono.variable} sr`}
+      >
         <body>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             <ReactQueryWrapper>
@@ -62,6 +66,7 @@ export default function RootLayout({
               <Analytics />
               <SpeedInsights />
               <Toaster />
+              <PageLoaderIndicator />
             </ReactQueryWrapper>
           </ThemeProvider>
         </body>

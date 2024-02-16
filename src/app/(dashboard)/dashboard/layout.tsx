@@ -27,7 +27,7 @@ export default async function DashboardLayout({
     <main className="bg-main-gradient">
       <Navbar borderBottom />
       <div className="container">
-        <div className="grid flex-1 md:grid-cols-[200px_1fr] mt-8 gap-12">
+        <div className="mt-8 grid flex-1 gap-12 md:grid-cols-[200px_1fr]">
           <DashboardAside />
           {children}
         </div>
