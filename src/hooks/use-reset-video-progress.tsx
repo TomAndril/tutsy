@@ -22,7 +22,7 @@ export default function useResetVideoProgress() {
       toast({
         variant: "default",
         title: "Updated",
-        description: "Your progress has been reset",
+        description: "Video progress has been reset",
       }),
   });
 }
