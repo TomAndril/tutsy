@@ -1,17 +1,16 @@
-import axios from "axios";
-import { getHost } from "./env";
 import { VideoSearchResult, VideoWithChapters } from "@/types/video";
 import { Chapter } from "@prisma/client";
 import { ReadonlyRequestCookies } from "next/dist/server/web/spec-extension/adapters/request-cookies";
+import API from "./axios";
 
 export async function addVideoToUserAccount(videoId: string) {
-  await axios.post(getHost() + "/api/video", {
+  await API.post("video", {
     videoId,
   });
 }
 
 export async function getUserVideos(cookies?: ReadonlyRequestCookies) {
-  const { data } = await axios.get(getHost() + "/api/user", {
+  const { data } = await API.get("user", {
     headers: {
       // required for next-auth to work
       cookie: cookies as any,
@@ -21,7 +20,7 @@ export async function getUserVideos(cookies?: ReadonlyRequestCookies) {
 }
 
 export async function getUserVideoById(videoId: string) {
-  const { data } = await axios.get(getHost() + "/api/progress", {
+  const { data } = await API.get("progress", {
     params: {
       videoId,
     },
@@ -30,7 +29,7 @@ export async function getUserVideoById(videoId: string) {
 }
 
 export async function deleteVideoFromUserAccount(videoId: string) {
-  await axios.delete(getHost() + "/api/video", {
+  await API.delete("video", {
     data: {
       videoId,
     },
@@ -38,7 +37,7 @@ export async function deleteVideoFromUserAccount(videoId: string) {
 }
 
 export async function resetVideoProgress(videoId: string) {
-  await axios.put(getHost() + "/api/progress", {
+  await API.put("progress", {
     videoId,
   });
 }
@@ -47,14 +46,14 @@ export async function updateChapterStatus(
   chapter: Chapter,
   hasCompletedAllChapters: boolean
 ) {
-  await axios.patch(getHost() + "/api/progress", {
+  await API.patch("progress", {
     chapterId: chapter.id,
     hasCompletedAllChapters,
   });
 }
 
 export async function getVideoSearchResults(query: string) {
-  const { data } = await axios.get(getHost() + "/api/search", {
+  const { data } = await API.get("search", {
     params: {
       query,
     },

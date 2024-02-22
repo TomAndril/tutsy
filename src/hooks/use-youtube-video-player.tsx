@@ -1,6 +1,6 @@
 import { VideoWithChapters } from "@/types/video";
 import { Chapter, Config } from "@prisma/client";
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useState } from "react";
 import ReactPlayer from "react-player";
 import useUpdateChapterStatus from "./use-update-chapter-status";
 import { toast } from "@/components/ui/use-toast";
