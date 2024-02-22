@@ -1,9 +1,8 @@
-import axios from "axios";
-import { getHost } from "./env";
 import ytdl from "ytdl-core";
+import API from "./axios";
 
 async function getVideoDetails(videoId: string) {
-  const { data } = await axios.get(getHost() + "/api/video?videoId=" + videoId);
+  const { data } = await API.get("video?videoId=" + videoId);
   const response = (await data) as {
     videoDetails: ytdl.videoInfo["videoDetails"];
   };
