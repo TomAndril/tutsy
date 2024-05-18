@@ -38,12 +38,24 @@ export async function POST(req: NextRequest) {
 
     const session = await getServerSession(authOptions);
 
-    const videoAlreadyExists = await db.video.findUnique({
+    if (!session) {
+      return NextResponse.json(
+        { message: "Unauthorized" },
+        {
+          status: 401,
+        }
+      );
+    }
+
+    const userVideos = await db.video.findMany({
       where: {
-        id: videoId,
         userId: session?.user.id,
       },
-    });
+    })
+
+    const videoAlreadyExists = userVideos.some((video) => video.youtubeId === videoId);
+
+    console.log(userVideos)
 
     if (videoAlreadyExists) {
       return NextResponse.json(

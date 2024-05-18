@@ -66,7 +66,12 @@ export default function SearchItemCard({ video }: Props) {
           onClick={() => mutate(video.videoId)}
         >
           <Icons.plus size={16} />
-          <span className="ml-2">Add to account</span>
+          <span className="ml-2 flex items-center">
+            Add to account
+            {isPending && (
+              <Icons.loader size={16} className="animate-spin ml-2" />
+            )}
+          </span>
         </Button>
       </CardFooter>
     </Card>

@@ -40,8 +40,7 @@ export default function useAddVideoToAccount() {
       });
     },
     onSuccess: () => {
-      router.refresh();
       router.push("/dashboard");
-    }
+    },
   });
 }

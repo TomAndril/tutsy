@@ -57,7 +57,7 @@ export default function RootLayout({
     <NextAuthProvider>
       <html
         lang="en"
-        className={`${GeistSans.variable} ${GeistMono.variable} sr`}
+        className={`${GeistSans.variable} ${GeistMono.variable} sr antialiased`}
       >
         <body>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
