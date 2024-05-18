@@ -55,8 +55,6 @@ export async function POST(req: NextRequest) {
 
     const videoAlreadyExists = userVideos.some((video) => video.youtubeId === videoId);
 
-    console.log(userVideos)
-
     if (videoAlreadyExists) {
       return NextResponse.json(
         { message: "Video already exists" },
