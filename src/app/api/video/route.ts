@@ -2,8 +2,7 @@ import ytdl from "ytdl-core";
 
 import { getVideoId } from "@/utils";
 import { NextRequest, NextResponse } from "next/server";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/auth";
+import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
 
 export const dynamic = "force-dynamic";
@@ -36,7 +35,7 @@ export async function POST(req: NextRequest) {
   try {
     const { videoId } = await req.json();
 
-    const session = await getServerSession(authOptions);
+    const session = await auth();
 
     if (!session) {
       return NextResponse.json(
@@ -51,9 +50,11 @@ export async function POST(req: NextRequest) {
       where: {
         userId: session?.user.id,
       },
-    })
+    });
 
-    const videoAlreadyExists = userVideos.some((video) => video.youtubeId === videoId);
+    const videoAlreadyExists = userVideos.some(
+      (video) => video.youtubeId === videoId
+    );
 
     if (videoAlreadyExists) {
       return NextResponse.json(
@@ -107,7 +108,7 @@ export async function DELETE(req: NextRequest) {
   try {
     const { videoId } = await req.json();
 
-    const session = await getServerSession(authOptions);
+    const session = await auth();
 
     const video = await db.video.findUnique({
       where: {

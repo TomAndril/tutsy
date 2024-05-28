@@ -1,10 +1,9 @@
-import { authOptions } from "@/lib/auth";
+import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
-import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {
-  const session = await getServerSession(authOptions);
+  const session = await auth();
 
   try {
     const userConfigurations = await db.config.findFirst({
@@ -23,7 +22,7 @@ export async function GET(req: NextRequest) {
 
 export async function PATCH(req: NextRequest) {
   try {
-    const session = await getServerSession(authOptions);
+    const session = await auth();
 
     const { config } = await req.json();
 

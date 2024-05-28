@@ -1,13 +1,12 @@
-import { authOptions } from "@/lib/auth";
+import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
-import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
 
 export const dynamic = "force-dynamic";
 
 export async function GET() {
   try {
-    const session = await getServerSession(authOptions);
+    const session = await auth();
 
     const userVideos = await db.video.findMany({
       where: {
@@ -42,7 +41,7 @@ export async function GET() {
 
 export async function PATCH(req: NextRequest) {
   try {
-    const session = await getServerSession(authOptions);
+    const session = await auth();
 
     const {
       userDetails: { name },
