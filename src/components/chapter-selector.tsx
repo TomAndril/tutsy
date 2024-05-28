@@ -20,6 +20,8 @@ import {
   DrawerOverlay,
   DrawerPortal,
 } from "./ui/drawer";
+import { cn } from "@/lib/utils";
+import { useCallback, useMemo } from "react";
 
 export default function ChapterSelector({
   video,
@@ -36,35 +38,41 @@ export default function ChapterSelector({
   isPending: boolean;
   variables: Chapter | undefined;
 }) {
-  const calculateChapterDuration = (chapter: Chapter) => {
-    const nextChapter = video.chapters.find(
-      (c) => c.startTime > chapter.startTime
-    );
-
-    if (!nextChapter) {
-      const finalChapterDuration = Math.round(
-        (video.duration - chapter.startTime) / 60
+  const calculateChapterDuration = useCallback(
+    (chapter: Chapter) => {
+      const nextChapter = video.chapters.find(
+        (c) => c.startTime > chapter.startTime
       );
 
-      if (finalChapterDuration < 1) {
+      if (!nextChapter) {
+        const finalChapterDuration = Math.round(
+          (video.duration - chapter.startTime) / 60
+        );
+
+        if (finalChapterDuration < 1) {
+          return `< 1 min`;
+        }
+
+        return `${finalChapterDuration} min`;
+      }
+
+      const chapterDuration = Math.round(
+        (nextChapter.startTime - chapter.startTime) / 60
+      );
+
+      if (chapterDuration < 1) {
         return `< 1 min`;
       }
 
-      return `${finalChapterDuration} min`;
-    }
+      return `${chapterDuration} min`;
+    },
+    [video.chapters, video.duration]
+  );
 
-    const chapterDuration = Math.round(
-      (nextChapter.startTime - chapter.startTime) / 60
-    );
-
-    if (chapterDuration < 1) {
-      return `< 1 min`;
-    }
-
-    return `${chapterDuration} min`;
-  };
-
-  const hasChapters = video.chapters?.length > 0;
+  const hasChapters = useMemo(
+    () => video.chapters?.length > 0,
+    [video.chapters]
+  );
 
   const isCollapsed = useMediaQuery("(max-width: 1024px)");
 
@@ -95,7 +103,13 @@ export default function ChapterSelector({
                   <Button
                     variant="ghost"
                     size="lg"
-                    className="text-xs rounded-none w-full justify-start px-4 lg:px-8"
+                    className={cn(
+                      "text-xs rounded-none w-full justify-start px-4 lg:px-8",
+                      {
+                        "bg-gradient-to-r from-slate-100 to-slate-300 dark:from-slate-800 dark:to-slate-900":
+                          currentChapter?.id === chapter.id,
+                      }
+                    )}
                     onClick={() => handleJumpToChapter(chapter.startTime)}
                   >
                     <span className="w-14 text-slate-400">
@@ -103,15 +117,6 @@ export default function ChapterSelector({
                     </span>
                     <h3 className="text-left w-full lg:w-96 lg:truncate px-4 flex items-center">
                       {chapter.title}
-                      {currentChapter?.id === chapter.id && (
-                        <div className="relative">
-                          <Icons.play size={14} className="ml-2 animate-ping" />
-                          <Icons.play
-                            size={14}
-                            className="ml-2 absolute top-0 left-0"
-                          />
-                        </div>
-                      )}
                     </h3>
 
                     {isPending && variables?.id === chapter.id && (
@@ -168,7 +173,13 @@ export default function ChapterSelector({
                       <Button
                         variant="ghost"
                         size="lg"
-                        className="text-xs rounded-none w-full justify-start px-4 lg:px-8"
+                        className={cn(
+                          "text-xs rounded-none w-full justify-start px-4 lg:px-8",
+                          {
+                            "bg-gradient-to-r from-slate-100 to-slate-300":
+                              currentChapter?.id === chapter.id,
+                          }
+                        )}
                         onClick={() => {
                           handleJumpToChapter(chapter.startTime);
                         }}
@@ -178,18 +189,6 @@ export default function ChapterSelector({
                         </span>
                         <h3 className="text-left w-full lg:w-96 lg:truncate px-4 flex items-center">
                           {chapter.title}
-                          {currentChapter?.id === chapter.id && (
-                            <div className="relative">
-                              <Icons.play
-                                size={14}
-                                className="ml-2 animate-ping"
-                              />
-                              <Icons.play
-                                size={14}
-                                className="ml-2 absolute top-0 left-0"
-                              />
-                            </div>
-                          )}
                         </h3>
 
                         {isPending && variables?.id === chapter.id && (
