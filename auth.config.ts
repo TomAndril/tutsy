@@ -9,4 +9,5 @@ export default {
       return session;
     },
   },
+  session: { strategy: "database" },
 } satisfies NextAuthConfig;
