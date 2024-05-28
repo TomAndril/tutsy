@@ -6,7 +6,16 @@ import { signIn } from "next-auth/react";
 export default function NavBarRightSideSignIn() {
   return (
     <div>
-      <Button size="sm" onClick={() => signIn()}>Sign In</Button>
+      <Button
+        size="sm"
+        onClick={() =>
+          signIn(undefined, {
+            callbackUrl: "/dashboard",
+          })
+        }
+      >
+        Sign In
+      </Button>
     </div>
   );
 }

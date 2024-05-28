@@ -14,7 +14,9 @@ import {
   Menu,
   ArrowUpNarrowWide,
   History,
-  ExternalLink
+  ExternalLink,
+  LayoutDashboard,
+  LogOut
 } from "lucide-react";
 
 export const Icons = {
@@ -33,7 +35,9 @@ export const Icons = {
   menu: Menu,
   arrowUp: ArrowUpNarrowWide,
   history: History,
-  extenalLink: ExternalLink
+  extenalLink: ExternalLink,
+  dashboard: LayoutDashboard,
+  logOut: LogOut
 };
 
 export type IconName = keyof typeof Icons;

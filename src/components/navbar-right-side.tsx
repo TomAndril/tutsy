@@ -1,12 +1,16 @@
-import Link from "next/link";
 import NavBarRightSideSignIn from "./navbar-right-side-sign-in";
-import NavBarRightSidePopoverContent from "./navbar-right-side-popover-content";
+import NavBarRightSideDropdownItems from "./navbar-right-side-dropdown-items";
 
 import { getFirstLetter } from "@/utils";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
-import { Popover, PopoverTrigger } from "./ui/popover";
-import { Button } from "./ui/button";
 import { auth } from "@/lib/auth";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "./ui/dropdown-menu";
 
 async function getUserStatus() {
   const session = await auth();
@@ -21,18 +25,19 @@ export default async function NavBarRightSide() {
   if (session?.name && session?.image) {
     return (
       <div className="flex items-center ml-auto md:ml-0">
-        <Button asChild variant="link" className="font-mono">
-          <Link href="/dashboard">Dashboard</Link>
-        </Button>
-        <Popover>
-          <PopoverTrigger>
+        <DropdownMenu>
+          <DropdownMenuTrigger>
             <Avatar>
               <AvatarImage src={session.image} alt={session.name} />
               <AvatarFallback>{getFirstLetter(session.name)}</AvatarFallback>
             </Avatar>
-          </PopoverTrigger>
-          <NavBarRightSidePopoverContent />
-        </Popover>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent>
+            <DropdownMenuLabel>{session.email}</DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            <NavBarRightSideDropdownItems />
+          </DropdownMenuContent>
+        </DropdownMenu>
       </div>
     );
   }

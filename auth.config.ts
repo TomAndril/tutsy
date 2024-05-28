@@ -4,4 +4,4 @@ import type { NextAuthConfig } from "next-auth";
 export default {
   providers: [Google],
   session: { strategy: "jwt" },
-} satisfies NextAuthConfig;
+} satisfies Omit<NextAuthConfig, "adapter">;
