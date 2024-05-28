@@ -3,13 +3,13 @@ import NavBarRightSideSignIn from "./navbar-right-side-sign-in";
 import NavBarRightSidePopoverContent from "./navbar-right-side-popover-content";
 
 import { getFirstLetter } from "@/utils";
-import { getServerSession } from "next-auth";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Popover, PopoverTrigger } from "./ui/popover";
 import { Button } from "./ui/button";
+import { auth } from "@/lib/auth";
 
 async function getUserStatus() {
-  const session = await getServerSession();
+  const session = await auth();
   if (session) {
     return session.user;
   }

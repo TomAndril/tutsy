@@ -1,6 +1,5 @@
-import { authOptions } from "@/lib/auth";
+import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
-import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
 
 export const dynamic = "force-dynamic";
@@ -11,7 +10,7 @@ export async function GET(req: NextRequest) {
 
     const videoId = searchParams.get("videoId") ?? "";
 
-    const session = await getServerSession(authOptions);
+    const session = await auth()
 
     const userVideo = await db.video.findUnique({
       where: {

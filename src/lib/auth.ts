@@ -1,36 +1,27 @@
+import NextAuth from "next-auth";
+import { PrismaClient } from "@prisma/client";
 import { PrismaAdapter } from "@auth/prisma-adapter";
-import { NextAuthOptions } from "next-auth";
-import { db } from "./db";
+import { PrismaNeon } from "@prisma/adapter-neon";
+import { Pool } from "@neondatabase/serverless";
 
-import GoogleProvider from "next-auth/providers/google";
+/* Providers */
+import Google from "next-auth/providers/google";
 
-export const authOptions: NextAuthOptions = {
-  adapter: PrismaAdapter(db) as NextAuthOptions["adapter"],
+/* Prisma Config */
+const pool = new Pool({ connectionString: process.env.DATABASE_URL });
+const adapter = new PrismaNeon(pool);
+const prisma = new PrismaClient({ adapter });
+
+export const { handlers, signIn, signOut, auth } = NextAuth({
+  adapter: PrismaAdapter(prisma),
+  providers: [Google],
   callbacks: {
-    session: async ({ session, token }) => {
-      session.user.id = token.sub ?? "";
+    async session({ session, user }) {
+      session.user.id = user.id;
       return session;
-    },
-
-    jwt: async ({ token, user, trigger, session }) => {
-      if (trigger === "update" && session?.user) {
-        token.name = session.user.name;
-      }
-
-      if (user) {
-        token.sub = user.id;
-      }
-
-      return token;
     },
   },
   session: {
-    strategy: "jwt",
+    strategy: "database",
   },
-  providers: [
-    GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID ?? "",
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET ?? "",
-    }),
-  ],
-};
+});
