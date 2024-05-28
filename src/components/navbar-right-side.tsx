@@ -33,7 +33,9 @@ export default async function NavBarRightSide() {
             </Avatar>
           </DropdownMenuTrigger>
           <DropdownMenuContent>
-            <DropdownMenuLabel>{session.email}</DropdownMenuLabel>
+            <DropdownMenuLabel>
+              {session.name || session.email}
+            </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <NavBarRightSideDropdownItems />
           </DropdownMenuContent>

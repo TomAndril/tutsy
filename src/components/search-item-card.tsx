@@ -35,7 +35,7 @@ export default function SearchItemCard({ video }: Props) {
   const { mutate, isPending } = useAddVideoToAccount();
 
   return (
-    <Card className="shadow">
+    <Card>
       <Image
         src={video.thumbnails?.[4]?.url ?? video.thumbnails?.[3]?.url}
         alt={video.title}
@@ -44,7 +44,7 @@ export default function SearchItemCard({ video }: Props) {
         width={320}
       />
       <CardHeader>
-        <CardTitle>{video.title}</CardTitle>
+        <CardTitle className="truncate">{video.title}</CardTitle>
         <CardDescription className="mt-8">
           <div className="flex items-center justify-between flex-wrap">
             <h3>{video.author.user ?? video.author.name}</h3>
@@ -52,9 +52,8 @@ export default function SearchItemCard({ video }: Props) {
           </div>
           <div className="flex items-center justify-between mt-2">
             <p>
-              {video.viewCount} views • {duration}
+              <span>{chaptersCount}</span> Chapters - {duration}
             </p>
-            <span>{chaptersCount} chapters</span>
             <p>{publishedDate}</p>
           </div>
         </CardDescription>
@@ -67,7 +66,7 @@ export default function SearchItemCard({ video }: Props) {
         >
           <Icons.plus size={16} />
           <span className="ml-2 flex items-center">
-            Add to account
+            Add
             {isPending && (
               <Icons.loader size={16} className="animate-spin ml-2" />
             )}

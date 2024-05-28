@@ -2,7 +2,6 @@ import DashboardContent from "@/components/dashboard-content";
 import DashboardHeader from "@/components/dashboard-header";
 import PlayerConfigForm from "@/components/player-config-form";
 import ThemeSelectorForm from "@/components/theme-selector-form";
-import UserConfigForm from "@/components/user-config-form";
 import { auth } from "@/lib/auth";
 import { getPlayerConfig } from "@/lib/user";
 import { Metadata } from "next";
@@ -30,7 +29,6 @@ export default async function SettingsPage() {
         subheading="Customize your experience"
       />
       <DashboardContent>
-        <UserConfigForm session={session} />
         <PlayerConfigForm config={config} />
         <ThemeSelectorForm />
       </DashboardContent>

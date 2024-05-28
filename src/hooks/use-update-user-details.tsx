@@ -15,7 +15,8 @@ export default function useUpdateUserDetails() {
     onSettled: () => {
       return toast({
         variant: "default",
-        title: "Settings updated",
+        title: "User Settings Updated",
+        description: 'Login again to see your changes'
       });
     },
   });

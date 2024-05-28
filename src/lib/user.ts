@@ -1,6 +1,5 @@
 import { ReadonlyRequestCookies } from "next/dist/server/web/spec-extension/adapters/request-cookies";
-import { Config, User } from "@prisma/client";
-import { UserConfig } from "./validations/user-config";
+import { Config } from "@prisma/client";
 import API from "./axios";
 
 export async function getPlayerConfig(cookies?: ReadonlyRequestCookies) {
@@ -18,9 +17,4 @@ export async function updatePlayerConfig(
 ) {
   const { data } = await API.patch("config", { config });
   return data as { config: Config };
-}
-
-export async function updateUserDetails(userDetails: UserConfig) {
-  const { data } = await API.patch("user", { userDetails });
-  return data as User;
 }
