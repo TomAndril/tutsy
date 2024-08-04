@@ -1,7 +1,6 @@
 "use client";
 
 import { RevealList } from "next-reveal";
-import NavBarSearch from "./navbar-search";
 
 export default function Hero() {
   return (
@@ -16,9 +15,6 @@ export default function Hero() {
         that allows you to learn from the best content creators on YouTube,
         without the distractions.
       </h2>
-      <div className="load-hidden max-w-2xl mx-auto mt-12 flex">
-        <NavBarSearch isHero />
-      </div>
     </RevealList>
   );
 }

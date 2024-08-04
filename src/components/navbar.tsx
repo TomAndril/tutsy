@@ -1,15 +1,18 @@
 import NavBarRightSide from "./navbar-right-side";
-
-import NavBarSearch from "./navbar-search";
-
 import MobileNav from "./mobile-nav";
 import NavBarLeftSide from "./navbar-left-side";
 
+import NavbarSearchVideo from "./navbar-search-video";
+import { getCurrentUser } from "@/lib/session";
+
 interface Props {
-  borderBottom?: boolean;
+  borderBottom?: boolean
 }
 
-export default function Navbar({ borderBottom = false }: Props) {
+export default async function Navbar({ borderBottom = false }: Props) {
+
+  const session = await getCurrentUser();
+
   return (
     <div
       className={`sticky top-0 backdrop-blur-xl bg-[var(--navbar-bg)] z-50 rounded ${
@@ -23,10 +26,8 @@ export default function Navbar({ borderBottom = false }: Props) {
         <div className="-ml-4 hidden md:flex items-center justify-center">
           <NavBarLeftSide />
         </div>
-        <div className="hidden md:flex w-2/5">
-          <NavBarSearch />
-        </div>
-        <NavBarRightSide />
+        <NavbarSearchVideo />
+        <NavBarRightSide session={session} />
       </nav>
     </div>
   );

@@ -24,9 +24,12 @@ export default function AddVideoToAccount({ videoId }: Props) {
       data-testid="add-video-button"
     >
       <div className="flex items-center">
-        {mutation.isPending && <Icons.loader className="animate-spin mr-2" />}
-        <Icons.plus className="mr-2" size={18} />
-        Add
+        {mutation.isPending ? (
+          <Icons.loader size={14} className="animate-spin mr-2" />
+        ) : (
+          <Icons.plus className="mr-1" size={14} />
+        )}
+        <span>Add to account</span>
       </div>
     </Button>
   );

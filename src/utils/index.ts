@@ -16,6 +16,22 @@ const getVideoId = (url: string) => {
   return id;
 };
 
+const extractIdFromUrl = (url: string) => {
+  const directFormat = url.split("v=")[1];
+  const shortFormat = url.split("youtu.be/")[1]?.split("?")[0];
+  const longFormat = url.split("&")[0];
+
+  if (shortFormat) {
+    return shortFormat;
+  }
+
+  if (longFormat) {
+    return longFormat.split("v=")[1];
+  }
+
+  return directFormat;
+};
+
 export const secondsToMinutes = (seconds: number) => {
   if (seconds === 0) return "Start";
 
@@ -44,4 +60,4 @@ export const calculatePercentage = (
 export const wait = (ms: number) =>
   new Promise((resolve) => setTimeout(resolve, ms));
 
-export { getFirstWord, getFirstLetter, getVideoId };
+export { getFirstWord, getFirstLetter, getVideoId, extractIdFromUrl };

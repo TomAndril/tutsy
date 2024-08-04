@@ -3,7 +3,6 @@
 import { Button } from "./ui/button";
 import { Icons } from "./icons";
 import Link from "next/link";
-import NavBarSearch from "./navbar-search";
 import {
   Sheet,
   SheetContent,
@@ -42,9 +41,6 @@ export default function MobileNav() {
             <Badge variant="secondary">Beta</Badge>
           </SheetTitle>
           <SheetDescription>
-            <div className="flex">
-              <NavBarSearch />
-            </div>
             <Separator className="my-4" />
             {status === "authenticated" &&
               dashboardNavItems.map((item) => {

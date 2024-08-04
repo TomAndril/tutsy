@@ -16,7 +16,12 @@ import {
   History,
   ExternalLink,
   LayoutDashboard,
-  LogOut
+  LogOut,
+  Clock,
+  TvMinimalPlay,
+  Eye,
+  CalendarClock,
+  CreativeCommons
 } from "lucide-react";
 
 export const Icons = {
@@ -37,7 +42,12 @@ export const Icons = {
   history: History,
   extenalLink: ExternalLink,
   dashboard: LayoutDashboard,
-  logOut: LogOut
+  logOut: LogOut,
+  clock: Clock,
+  tv: TvMinimalPlay,
+  eye: Eye,
+  calendar: CalendarClock,
+  creativeCommons: CreativeCommons
 };
 
 export type IconName = keyof typeof Icons;

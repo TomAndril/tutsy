@@ -1,8 +1,5 @@
-import Link from "next/link";
 import DashboardHeader from "@/components/dashboard-header";
 import DashboardVideosContainer from "@/components/dashboard-videos-container";
-import { Icons } from "@/components/icons";
-import { Button } from "@/components/ui/button";
 import { getUserVideos } from "@/lib/videos";
 import { cookies } from "next/headers";
 
@@ -12,17 +9,7 @@ export default async function Dashboard() {
 
   return (
     <div data-testid="dashboard-videos">
-      <DashboardHeader
-        title="Videos"
-        subheading="Browse your videos"
-      >
-        <Button size="sm" asChild>
-          <Link href="/dashboard/add">
-            <Icons.plus size={12} className="mr-2" />
-            <span>Add video</span>
-          </Link>
-        </Button>
-      </DashboardHeader>
+      <DashboardHeader title="Videos" subheading="Browse your videos" />
       <DashboardVideosContainer videos={videos} />
     </div>
   );
