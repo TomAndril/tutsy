@@ -1,8 +1,13 @@
-import Link from "next/link";
+"use client";
+
+import useMediaQuery from "@/hooks/use-media-query";
 import { Icons } from "./icons";
-import { Button } from "./ui/button";
+import NavbarSearchVideo from "./navbar-search-video";
 
 export default function NoVideosPlaceholder() {
+
+  const isMobile = useMediaQuery("(max-width: 767px)");
+
   return (
     <div className="border border-dashed flex items-center flex-col py-24 rounded mt-4">
       <div className="bg-slate-200 dark:bg-slate-700 p-4 rounded-full flex items-center justify-center">
@@ -14,12 +19,9 @@ export default function NoVideosPlaceholder() {
           You don&apos;t have any videos yet. Add a new one
         </p>
       </div>
-      <Button className="mt-8" size="sm" asChild>
-        <Link href="/dashboard/add">
-          <Icons.plus size={14} />
-          <span className="ml-2">Add Video</span>
-        </Link>
-      </Button>
+      <div className="mt-4">
+        <NavbarSearchVideo isMobileSearch={isMobile} />
+      </div>
     </div>
   );
 }
