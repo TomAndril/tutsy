@@ -54,7 +54,7 @@ export default function NavbarSearchVideo({
           render={({ field }) => (
             <FormItem>
               <FormControl>
-                <div className="flex items-center max-w-xs md:max-w-2xl mx-auto mt-2 bg-gradient-to-r bg-slate-900 dark:from-slate-600 dark:to-slate-700 p-1 rounded-md animate-border">
+                <div className="flex items-center max-w-xs md:max-w-2xl mx-6 mt-2 bg-gradient-to-r bg-slate-900 dark:from-slate-600 dark:to-slate-700 p-1 rounded-md animate-border">
                   <Input
                     className="rounded-r-none w-[16em] md:w-[32em] pl-6 focus:ring-1 ring-in focus:ring-slate-100 dark:focus:ring-slate-800"
                     placeholder="Paste YouTube Link"
