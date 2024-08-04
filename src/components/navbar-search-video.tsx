@@ -16,12 +16,12 @@ import { cn } from "@/lib/utils";
 
 interface Props {
   isMobileSearch?: boolean;
-  closeModal?: () => void;
+  closeDialog?: () => void;
 }
 
 export default function NavbarSearchVideo({
   isMobileSearch,
-  closeModal,
+  closeDialog,
 }: Props) {
   const form = useForm<AddVideoSchema>({
     resolver: zodResolver(addVideoSchema),
@@ -35,7 +35,7 @@ export default function NavbarSearchVideo({
   function onSubmit({ videoUrl }: AddVideoSchema) {
     const videoId = extractIdFromUrl(videoUrl);
 
-    closeModal?.();
+    closeDialog?.();
 
     if (videoId) {
       router.push(`/add/${videoId}`);
@@ -54,7 +54,7 @@ export default function NavbarSearchVideo({
           render={({ field }) => (
             <FormItem>
               <FormControl>
-                <div className="flex items-center max-w-xs md:max-w-2xl mx-2 mt-2 bg-gradient-to-r bg-slate-900 dark:from-slate-600 dark:to-slate-700 p-1 rounded-md animate-border">
+                <div className="flex items-center mx-auto max-w-xs md:max-w-2xl mt-2 bg-gradient-to-r bg-slate-900 dark:from-slate-600 dark:to-slate-700 p-1 rounded-md animate-border">
                   <Input
                     className="rounded-r-none w-[16em] md:w-[32em] pl-6 focus:ring-1 ring-in focus:ring-slate-100 dark:focus:ring-slate-800"
                     placeholder="Paste YouTube Link"
