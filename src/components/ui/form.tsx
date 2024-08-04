@@ -12,6 +12,7 @@ import {
 
 import { cn } from "@/lib/utils"
 import { Label } from "@/components/ui/label"
+import { Icons } from "../icons"
 
 const Form = FormProvider
 
@@ -155,9 +156,10 @@ const FormMessage = React.forwardRef<
     <p
       ref={ref}
       id={formMessageId}
-      className={cn("text-sm font-medium text-red-500 dark:text-red-900", className)}
+      className={cn("text-sm flex items-center font-medium text-red-500 dark:text-red-900", className)}
       {...props}
     >
+      <Icons.info size={18} className="mr-1 text-red-500 dark:text-red-900" />
       {body}
     </p>
   )

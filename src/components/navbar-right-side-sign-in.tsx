@@ -5,7 +5,7 @@ import { signIn } from "next-auth/react";
 
 export default function NavBarRightSideSignIn() {
   return (
-    <div>
+    <div className="flex items-center">
       <Button
         size="sm"
         onClick={() =>

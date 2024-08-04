@@ -54,11 +54,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <NextAuthProvider>
-      <html
-        lang="en"
-        className={`${GeistSans.variable} ${GeistMono.variable} sr antialiased`}
-      >
+    <html
+      suppressHydrationWarning
+      lang="en"
+      className={`${GeistSans.variable} ${GeistMono.variable} sr antialiased`}
+    >
+      <NextAuthProvider>
         <body>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             <ReactQueryWrapper>
@@ -70,7 +71,7 @@ export default function RootLayout({
             </ReactQueryWrapper>
           </ThemeProvider>
         </body>
-      </html>
-    </NextAuthProvider>
+      </NextAuthProvider>
+    </html>
   );
 }

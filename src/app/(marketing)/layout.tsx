@@ -4,7 +4,7 @@ interface Props {
   children: React.ReactNode;
 }
 
-export default function MarketingLayout({ children }: Props) {
+export default async function MarketingLayout({ children }: Props) {
   return (
     <div className="bg-main-gradient">
       <Navbar borderBottom />

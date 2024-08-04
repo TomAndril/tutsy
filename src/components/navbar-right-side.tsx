@@ -3,7 +3,6 @@ import NavBarRightSideDropdownItems from "./navbar-right-side-dropdown-items";
 
 import { getFirstLetter } from "@/utils";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
-import { auth } from "@/lib/auth";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -11,17 +10,13 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
+import { Session } from "next-auth";
 
-async function getUserStatus() {
-  const session = await auth();
-  if (session) {
-    return session.user;
-  }
+interface Props {
+  session: Session['user'] | undefined
 }
 
-export default async function NavBarRightSide() {
-  const session = await getUserStatus();
-
+export default function NavBarRightSide({ session }: Props) {
   if (session?.name && session?.image) {
     return (
       <div className="flex items-center ml-auto md:ml-0">
