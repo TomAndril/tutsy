@@ -1,6 +1,8 @@
 import { VideoWithChapters } from "@/types/video";
 import VideoListCard from "./video-list-card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
+import { Alert, AlertDescription, AlertTitle } from "./ui/alert";
+import { Icons } from "./icons";
 
 interface Props {
   videos: VideoWithChapters[];
@@ -19,6 +21,8 @@ export default function VideoList({ videos }: Props) {
           {videos.map((video) => (
             <VideoListCard video={video} key={video.id} />
           ))}
+
+          {videos.length === 0 && <NoVideosSection name="All" />}
         </div>
       </TabsContent>
       <TabsContent value="in-progress">
@@ -28,6 +32,10 @@ export default function VideoList({ videos }: Props) {
             .map((elem) => (
               <VideoListCard video={elem} key={elem.id} />
             ))}
+
+          {videos.filter((video) => !video.completed).length === 0 && (
+            <NoVideosSection name="In Progress" />
+          )}
         </div>
       </TabsContent>
       <TabsContent value="completed">
@@ -37,8 +45,22 @@ export default function VideoList({ videos }: Props) {
             .map((elem) => (
               <VideoListCard video={elem} key={elem.id} />
             ))}
+
+          {videos.filter((video) => video.completed).length === 0 && (
+            <NoVideosSection name="Completed" />
+          )}
         </div>
       </TabsContent>
     </Tabs>
+  );
+}
+
+function NoVideosSection({ name }: { name: string }) {
+  return (
+    <Alert>
+      <Icons.info size={16} />
+      <AlertTitle>Nothing Here</AlertTitle>
+      <AlertDescription>You don&apos;t have any {name} videos</AlertDescription>
+    </Alert>
   );
 }
