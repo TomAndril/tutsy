@@ -1,3 +1,5 @@
+"use client";
+
 import NavBarRightSideSignIn from "./navbar-right-side-sign-in";
 import NavBarRightSideDropdownItems from "./navbar-right-side-dropdown-items";
 
@@ -11,37 +13,69 @@ import {
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
 import { Session } from "next-auth";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "./ui/dialog";
+import NavbarSearchVideo from "./navbar-search-video";
+import { Icons } from "./icons";
+import { useState } from "react";
 
 interface Props {
-  session: Session['user'] | undefined
+  session: Session["user"] | undefined;
 }
 
 export default function NavBarRightSide({ session }: Props) {
-  if (session?.name && session?.image) {
-    return (
-      <div className="flex items-center ml-auto md:ml-0">
-        <DropdownMenu>
-          <DropdownMenuTrigger>
-            <Avatar>
-              <AvatarImage src={session.image} alt={session.name} />
-              <AvatarFallback>{getFirstLetter(session.name)}</AvatarFallback>
-            </Avatar>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent>
-            <DropdownMenuLabel>
-              {session.name || session.email}
-            </DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            <NavBarRightSideDropdownItems />
-          </DropdownMenuContent>
-        </DropdownMenu>
-      </div>
-    );
-  }
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   return (
-    <div>
-      <NavBarRightSideSignIn />
+    <div className="flex items-center">
+      <div className="block md:hidden">
+        <Dialog open={isDropdownOpen} onOpenChange={setIsDropdownOpen}>
+          <DialogTrigger className="p-2 mr-4">
+            <Icons.search size={18} />
+          </DialogTrigger>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>Paste Youtube Link</DialogTitle>
+              <DialogDescription>
+                Paste the link of the video you want to add
+              </DialogDescription>
+            </DialogHeader>
+            <NavbarSearchVideo
+              isMobileSearch
+              closeModal={() => setIsDropdownOpen(false)}
+            />
+          </DialogContent>
+        </Dialog>
+      </div>
+      {session?.name && session?.image ? (
+        <div className="flex items-center ml-auto md:ml-0">
+          <DropdownMenu>
+            <DropdownMenuTrigger>
+              <Avatar>
+                <AvatarImage src={session.image} alt={session.name} />
+                <AvatarFallback>{getFirstLetter(session.name)}</AvatarFallback>
+              </Avatar>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+              <DropdownMenuLabel>
+                {session.name || session.email}
+              </DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <NavBarRightSideDropdownItems />
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
+      ) : (
+        <div>
+          <NavBarRightSideSignIn />
+        </div>
+      )}
     </div>
   );
 }
