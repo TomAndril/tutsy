@@ -16,12 +16,12 @@ import { cn } from "@/lib/utils";
 
 interface Props {
   isMobileSearch?: boolean;
-  closeModal?: () => void;
+  closeDialog?: () => void;
 }
 
 export default function NavbarSearchVideo({
   isMobileSearch,
-  closeModal,
+  closeDialog: closeModal,
 }: Props) {
   const form = useForm<AddVideoSchema>({
     resolver: zodResolver(addVideoSchema),

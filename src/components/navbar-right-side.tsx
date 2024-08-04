@@ -30,16 +30,16 @@ interface Props {
 }
 
 export default function NavBarRightSide({ session }: Props) {
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   return (
     <div className="flex items-center">
       <div className="block md:hidden">
-        <Dialog open={isDropdownOpen} onOpenChange={setIsDropdownOpen}>
+        <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
           <DialogTrigger className="p-2 mr-4">
             <Icons.search size={18} />
           </DialogTrigger>
-          <DialogContent>
+          <DialogContent onOpenAutoFocus={(e) => e.preventDefault()}>
             <DialogHeader>
               <DialogTitle>Paste Youtube Link</DialogTitle>
               <DialogDescription>
@@ -48,7 +48,7 @@ export default function NavBarRightSide({ session }: Props) {
             </DialogHeader>
             <NavbarSearchVideo
               isMobileSearch
-              closeModal={() => setIsDropdownOpen(false)}
+              closeDialog={() => setIsDialogOpen(false)}
             />
           </DialogContent>
         </Dialog>
