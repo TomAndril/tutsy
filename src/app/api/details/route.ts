@@ -8,11 +8,19 @@ export async function GET(req: NextRequest) {
   try {
     const { searchParams } = new URL(req.url);
 
+    console.log('searchParams', searchParams);
+
     const videoId = searchParams.get("videoId") ?? "";
+
+    console.log('videoId', videoId);
 
     const parsedVideoId = getVideoId(videoId);
 
+    console.log('parsedVideoId', parsedVideoId);
+
     const { videoDetails } = await ytdl.getInfo(parsedVideoId);
+
+    console.log('videoDetails', videoDetails);
 
     return NextResponse.json({ videoDetails });
   } catch (error) {
