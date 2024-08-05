@@ -15,9 +15,6 @@ export async function GET(req: NextRequest) {
 
     const { videoDetails } = await ytdl.getInfo(parsedVideoId);
 
-    console.log("reached");
-    console.log("pepito", videoDetails);
-
     return NextResponse.json({ videoDetails });
   } catch (error) {
     const err = error as Error;
