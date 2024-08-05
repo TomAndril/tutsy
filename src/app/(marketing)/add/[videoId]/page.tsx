@@ -1,5 +1,6 @@
 import FetchVideoDetailsData from "@/components/fetch-video-details-data";
-import { fetchVideoDetails } from "@/lib/api";
+import { getVideoDetails } from "@/lib/api";
+import { cookies } from "next/headers";
 
 interface Params {
   params: {
@@ -8,7 +9,7 @@ interface Params {
 }
 
 export default async function AddPage({ params }: Params) {
-  const videoDetails = await fetchVideoDetails(params.videoId);
+  const videoDetails = await getVideoDetails(params.videoId, cookies());
 
   return (
     <div className="container my-4">
