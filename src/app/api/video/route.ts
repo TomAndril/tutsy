@@ -1,36 +1,8 @@
 import ytdl from "ytdl-core";
 
-import { getVideoId } from "@/utils";
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
-
-export async function GET(req: NextRequest) {
-  try {
-    const { searchParams } = new URL(req.url);
-
-    const videoId = searchParams.get("videoId") ?? "";
-
-    const parsedVideoId = getVideoId(videoId);
-
-    const { videoDetails } = await ytdl.getInfo(parsedVideoId);
-
-    return NextResponse.json({ videoDetails });
-  } catch (error) {
-    const err = error as Error;
-    return NextResponse.json(
-      {
-        error: err.message,
-        stack: err.stack,
-        cause: err.cause,
-        name: err.name,
-      },
-      {
-        status: 500,
-      }
-    );
-  }
-}
 
 export async function POST(req: NextRequest) {
   try {
