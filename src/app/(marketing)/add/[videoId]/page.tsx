@@ -1,5 +1,5 @@
 import FetchVideoDetailsData from "@/components/fetch-video-details-data";
-import { getVideoDetails } from "@/lib/api";
+import { fetchVideoDetails } from "@/lib/api";
 
 interface Params {
   params: {
@@ -8,7 +8,7 @@ interface Params {
 }
 
 export default async function AddPage({ params }: Params) {
-  const videoDetails = await getVideoDetails(params.videoId);
+  const videoDetails = await fetchVideoDetails(params.videoId);
 
   return (
     <div className="container my-4">

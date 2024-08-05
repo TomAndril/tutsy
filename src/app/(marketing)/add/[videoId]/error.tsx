@@ -18,11 +18,6 @@ export default function AddVideoError({ error, reset }: Props) {
         The video you were trying to add could not be found
       </p>
       <p className="mt-2">Please make sure that the video link is correct and try again</p>
-      <p>{error.digest}</p>
-      <p>{error.message}</p>
-      <p>{error.name}</p>
-      <p>{error.stack}</p>
-      <p>{JSON.stringify(error.cause)}</p>
     </div>
   );
 }
