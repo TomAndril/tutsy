@@ -21,6 +21,9 @@ export async function GET(req: NextRequest) {
     return NextResponse.json(
       {
         error: err.message,
+        stack: err.stack,
+        cause: err.cause,
+        name: err.name,
       },
       {
         status: 500,

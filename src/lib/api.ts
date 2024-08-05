@@ -1,18 +1,10 @@
-import { VideoDetails } from "@/types/video";
+import ytdl from "ytdl-core";
 import API from "./axios";
-import { ReadonlyRequestCookies } from "next/dist/server/web/spec-extension/adapters/request-cookies";
 
-async function getVideoDetails(
-  videoId: string,
-  cookies?: ReadonlyRequestCookies
-) {
-  const { data } = await API.get("video?videoId=" + videoId, {
-    headers: {
-      cookie: cookies as any,
-    },
-  });
+async function getVideoDetails(videoId: string) {
+  const { data } = await API.get("video?videoId=" + videoId);
   const response = (await data) as {
-    videoDetails: VideoDetails;
+    videoDetails: ytdl.videoInfo["videoDetails"];
   };
 
   return response.videoDetails;
